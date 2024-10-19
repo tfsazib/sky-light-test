@@ -1,14 +1,14 @@
 ---
-title: "Powerful Termand Lineesy Tools For Modern Web…"
+title: Test Powerful Termand Lineesy Tools For Modern Web…
 date: 2023-01-04T05:00:00Z
-categories: ["Design"]
-author: "Sophia **Parker**"
-image: "/images/office-img-1.png"
-description: "Applications are like the lifeblood of mobile phones and tablets today. The true potential of your mobile phone is harnessed by applications that can provide utility. Apps come under various segments."
+categories:
+  - Design
+author: Sophia **Parker**
+image: /images/office-img-1.png
+description: "Test Applications are like the\_lifeblood of mobile\_phones and tablets today. The true potential of your mobile phone is harnessed by applications that can provide utility. Apps come under various segments."
 featured_post: true
 draft: false
 ---
-
 Nemo vel ad consectetur namut rutrum ex, venenatis sollicitudin urna. Aliquam erat volutpat. Integer eu ipsum sem. Ut bibendum lacus vestibulum maximus suscipit. Quisque vitae nibh iaculis neque blandit euismod.
 
 Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo vel ad consectetur ut aperiam. Itaque eligendi natus aperiam? Excepturi repellendus consequatur quibusdam optio expedita praesentium est adipisci dolorem ut eius!
