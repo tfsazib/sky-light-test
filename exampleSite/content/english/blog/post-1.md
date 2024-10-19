@@ -3,7 +3,6 @@ title: Test Powerful Termand Lineesy Tools For Modern Web…
 date: 2023-01-04T05:00:00Z
 categories:
   - Test
-  - Design
 author: Sophia **Parker**
 image: /images/office-img-1.png
 description: "Test Applications are like the\_lifeblood of mobile\_phones and tablets today. The true potential of your mobile phone is harnessed by applications that can provide utility. Apps come under various segments."
