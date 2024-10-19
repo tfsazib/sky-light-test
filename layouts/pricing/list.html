@@ -1,0 +1,302 @@
+{{ define "main" }}
+  <section class="mx-4">
+    <div
+      class="bg-shape-top-right py-20 lg:py-24 2xl:py-32"
+      {{ partial `bg-image.html` (dict `Src` "images/bg-shape.png" ) | safeHTMLAttr }}>
+      <div class="container">
+        <div class="max-w-xl mx-auto pb-8 text-center">
+          <h1 class="pb-4" data-aos="fade-up-sm">
+            {{ .Params.title | markdownify }}
+          </h1>
+          <p data-aos="fade-up-sm" data-aos-delay="50">
+            {{ .Params.description | markdownify }}
+          </p>
+        </div>
+      </div>
+      {{ partial "components/pricing-plan.html" . }}
+    </div>
+  </section>
+
+  {{ with .Params.features }}
+    <section class="section pb-0">
+      <div class="container">
+        <div class="col-12 text-center">
+          <div class="bg-primary z-20 rounded-t-xl text-white lg:top-[90px]">
+            <div class="lg:row gx-0 md:items-center md:py-3">
+              <div class="lg:col-6 hidden text-start lg:block">
+                <div
+                  class="flex min-h-full items-center justify-center md:block">
+                  <div class="pl-8 font-semibold">Features</div>
+                </div>
+              </div>
+              <div class="lg:col-6 lg:border-l">
+                <div class="row divide-x">
+                  <div class="col lg:col-4">
+                    <div class="flex min-h-full items-center justify-center">
+                      <div class="px-1.5 py-4 font-medium">
+                        {{ .starter | markdownify }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col lg:col-4">
+                    <div class="flex min-h-full items-center justify-center">
+                      <div class="px-1.5 py-4 font-medium">
+                        {{ .business | markdownify }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col lg:col-4">
+                    <div class="flex min-h-full items-center justify-center">
+                      <div class="px-1.5 py-4 font-medium">
+                        {{ .enterprise | markdownify }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="overflow-x-hidden">
+            <div class="border-x">
+              {{ range .features_list }}
+                <div class="row g-0">
+                  <div class="lg:col-6 border-b border-r text-start">
+                    <div
+                      class="flex h-full items-center justify-between px-3 py-3 sm:px-6 sm:py-6 lg:pl-8 lg:pr-2">
+                      <div class="font-medium capitalize">
+                        {{ .item | markdownify }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="lg:col-6  border-b">
+                    <div class="row g-0 divide-x">
+                      <div
+                        class="col flex items-center justify-center lg:col-4">
+                        <div class="px-3 py-3 text-[10px] sm:py-6">
+                          {{ if .starter }}
+                            <svg
+                              class="mx-auto"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path
+                                d="M9.55156 17.9996L3.85156 12.2996L5.27656 10.8746L9.55156 15.1496L18.7266 5.97461L20.1516 7.39961L9.55156 17.9996Z"
+                                fill="currentColor" />
+                            </svg>
+                          {{ else }}
+                            <svg
+                              class="text-primary mx-auto"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path
+                                d="M6.75781 17.2438L12.0008 12.0008M17.2438 6.75781L11.9998 12.0008M11.9998 12.0008L6.75781 6.75781M12.0008 12.0008L17.2438 17.2438"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            </svg>
+                          {{ end }}
+                        </div>
+                      </div>
+                      <div
+                        class="col flex items-center justify-center lg:col-4">
+                        <div class="px-3 py-3 text-[10px] sm:py-6">
+                          {{ if .business }}
+                            <svg
+                              class="mx-auto"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path
+                                d="M9.55156 17.9996L3.85156 12.2996L5.27656 10.8746L9.55156 15.1496L18.7266 5.97461L20.1516 7.39961L9.55156 17.9996Z"
+                                fill="currentColor" />
+                            </svg>
+                          {{ else }}
+                            <svg
+                              class="text-primary mx-auto"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path
+                                d="M6.75781 17.2438L12.0008 12.0008M17.2438 6.75781L11.9998 12.0008M11.9998 12.0008L6.75781 6.75781M12.0008 12.0008L17.2438 17.2438"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            </svg>
+                          {{ end }}
+                        </div>
+                      </div>
+                      <div
+                        class="col flex items-center justify-center lg:col-4">
+                        <div class="px-3 py-3 text-[10px] sm:py-6">
+                          {{ if .enterprise }}
+                            <svg
+                              class="mx-auto"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path
+                                d="M9.55156 17.9996L3.85156 12.2996L5.27656 10.8746L9.55156 15.1496L18.7266 5.97461L20.1516 7.39961L9.55156 17.9996Z"
+                                fill="currentColor" />
+                            </svg>
+                          {{ else }}
+                            <svg
+                              class="text-primary mx-auto"
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path
+                                d="M6.75781 17.2438L12.0008 12.0008M17.2438 6.75781L11.9998 12.0008M11.9998 12.0008L6.75781 6.75781M12.0008 12.0008L17.2438 17.2438"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            </svg>
+                          {{ end }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {{ end }}
+            </div>
+
+            <!-- Plan Buttons -->
+            <div class="rounded-b-xl border border-t-0 bg-theme-light">
+              <div class="row g-0">
+                <div class="hidden lg:col-6 lg:block"></div>
+                <div class="lg:col-6">
+                  <div class="row gx-1">
+                    <div
+                      class="col-4 {{ if not .starter_btn.enable }}
+                        opacity-0
+                      {{ end }}">
+                      <div class="flex min-h-full items-center justify-center">
+                        <a
+                          href="{{ .starter_btn.link }}"
+                          class="btn btn-outline-primary whitespace-nowrap px-2 sm:px-5 mx-1 my-4 md:mx-3">
+                          {{ .starter_btn.label | markdownify }}
+                        </a>
+                      </div>
+                    </div>
+                    <div
+                      class="col-4 {{ if not .business_btn.enable }}
+                        opacity-0
+                      {{ end }}">
+                      <div class="flex min-h-full items-center justify-center">
+                        <a
+                          href="{{ .business_btn.link }}"
+                          class="btn btn-outline-primary whitespace-nowrap px-2 sm:px-5 mx-1 my-4 md:mx-3">
+                          {{ .business_btn.label | markdownify }}
+                        </a>
+                      </div>
+                    </div>
+                    <div
+                      class="col-4 {{ if not .enterprise_btn.enable }}
+                        opacity-0
+                      {{ end }}">
+                      <div class="flex min-h-full items-center justify-center">
+                        <a
+                          href="{{ .enterprise_btn.link }}"
+                          class="btn btn-outline-primary whitespace-nowrap px-2 sm:px-5 mx-1 my-4 md:mx-3">
+                          {{ .enterprise_btn.label | markdownify }}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{ end }}
+
+  {{ with .Params.free_trial }}
+    <section class="section overflow-hidden">
+      <div class="container">
+        <div class="row justify-center">
+          <div class="md:col-10">
+            <div class="row g-4 justify-between items-center">
+              <div class="lg:col-6" data-aos="fade-right-sm">
+                <h2 class="pb-4">{{ .title | markdownify }}</h2>
+                <p class="pb-8">{{ .description | markdownify }}</p>
+                {{ range .list }}
+                  <div class="flex items-center gap-2 pb-4">
+                    <svg
+                      class="text-primary shrink-0"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M5.90819 21.2461H18.1023C20.2019 21.2461 21.2463 20.2017 21.2463 18.1325V5.86723C21.2463 3.79809 20.2019 2.75366 18.1023 2.75366H5.90819C3.81891 2.75366 2.75391 3.78823 2.75391 5.86723V18.1329C2.75391 20.212 3.81891 21.2461 5.90819 21.2461ZM5.93819 19.6295C4.93405 19.6295 4.37133 19.0972 4.37133 18.0524V5.94866C4.37133 4.90381 4.93405 4.37152 5.93819 4.37152H18.0723C19.0666 4.37152 19.6293 4.90381 19.6293 5.94866V18.0515C19.6293 19.0964 19.0666 19.6287 18.0723 19.6287L5.93819 19.6295ZM10.7498 17.0079C11.081 17.0079 11.3523 16.8472 11.5632 16.5258L16.526 8.72066C16.646 8.52952 16.7669 8.29852 16.7669 8.07781C16.7669 7.61581 16.3653 7.32438 15.9432 7.32438C15.6719 7.32438 15.4208 7.48509 15.2403 7.78638L10.7103 15.0485L8.36948 12.0254C8.14876 11.7339 7.90748 11.6234 7.63662 11.6234C7.19433 11.6234 6.84291 11.9748 6.84291 12.4269C6.84291 12.6481 6.93291 12.8688 7.08376 13.0599L9.88662 16.5352C10.1575 16.8567 10.4185 17.0075 10.7502 17.0075"
+                        fill="currentColor"></path>
+                    </svg>
+                    <h6 class="font-medium">{{ .item | markdownify }}</h6>
+                  </div>
+                {{ end }}
+              </div>
+              <div class="lg:col-5" data-aos="fade-left-sm">
+                <div
+                  class="border border-primary rounded-lg p-6 lg:p-10 xl:p-14">
+                  <p
+                    class="text-sm border border-primary bg-theme-light rounded px-2 py-1 w-fit block mx-auto mb-5">
+                    {{ .flexible_pricing.sub_title | markdownify }}
+                  </p>
+                  <h3 class="font-semibold text-center pb-6">
+                    {{ .flexible_pricing.title | markdownify }}
+                  </h3>
+                  <p class="text-sm text-center pb-10">
+                    {{ .flexible_pricing.description | markdownify }}
+                  </p>
+
+                  {{ if .button.enable }}
+                    <div class="block w-fit mx-auto">
+                      <a class="btn btn-primary" href="{{ .button.link }}">
+                        {{ .button.label | markdownify }}
+                        <svg
+                          class="w-3 sm:w-4"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 14 14"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+                            fill="currentColor" />
+                        </svg>
+                      </a>
+                    </div>
+                  {{ end }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{ end }}
+
+
+  <!-- Call to action -->
+  {{ partial "call-to-action.html" . }}
+  <!-- /Call to action -->
+{{ end }}

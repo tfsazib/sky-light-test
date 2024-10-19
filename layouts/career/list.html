@@ -1,0 +1,206 @@
+{{ define "main" }}
+{{ partial "page-header" . }}
+
+{{ with .Params.career_hero }}
+<section class="section pb-0">
+  <div class="container">
+    <div class="row justify-center">
+      <div class="md:col-10 pb-14">
+        <h1 class="text-center pb-4" data-aos="fade-up-sm">{{ .title | markdownify }}</h1>
+        <p class="text-center" data-aos="fade-up-sm" data-aos-delay="50">{{ .description | markdownify }}</p>
+      </div>
+    </div>
+    <div class="sm:columns-2 lg:columns-3 gap-5">
+      {{ range .images }}
+      <div class="mb-5">
+        {{ partial "image" (dict "Src" .image "Alt" "career-office" "Class" `w-full object-cover aspect-video mb-5 rounded-xl`) }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+<section class="section pb-0 mx-4">
+  <div class="bg-shape-top-right" {{ partial `bg-image.html` (dict `Src` "images/bg-shape.png" ) | safeHTMLAttr }}>
+    <div class="container py-14 z-10">
+      {{range .Params.about_company }}
+      <div class="row g-4 xl:g-5 justify-between items-center investment-container">
+        <div class="lg:col-6" data-aos="fade-right-sm" data-aos-delay="50">
+          {{ partial "image" (dict "Src" .image "Alt" "about-office" "Class" "rounded-xl w-full") }}
+        </div>
+        <div class="lg:col-6" data-aos="fade-left-sm" data-aos-delay="50">
+          <h2 class="h1 pb-6">{{ .title | markdownify }}</h2>
+          <p class="pb-8">{{ .description.description | markdownify }}</p>
+          {{ if .description.sort_description }}
+          <p class="pb-8">{{ .description.sort_description | markdownify }}</p>
+          {{ end }}
+          {{ if .list }}
+          <ul class="list-disc list-outside ml-5 marker:text-primary  {{ if .list }} none {{ end }}">
+            {{ range .list }}
+            <li>{{ .item | markdownify }}</li>
+            {{ end }}
+          </ul>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+</section>
+
+
+{{ with .Params.benefits_and_perks }}
+<section class="section pb-0">
+  <div class="container">
+    <div class="max-w-lg mx-auto pb-24 text-center">
+      <h2 class="h1 pb-4" data-aos="fade-up-sm">{{ .title | markdownify }}</h2>
+      <p data-aos="fade-up-sm" data-aos-delay="50">{{ .description | markdownify }}</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-20" data-aos="fade-up-sm" data-aos-delay="100">
+      {{ range .benefits }}
+      <div class="bg-body shadow rounded relative p-5 h-full">
+        <div
+          class="p-2 rounded absolute top-[-30px] bg-theme-light w-14 h-14 flex justify-center items-center mx-auto">
+          <i class="{{ .icon }} text-3xl text-primary"></i>
+        </div>
+        <h6 class="pt-8 pb-5">{{ .title | markdownify }}</h6>
+        <p>{{ .description | markdownify }}</p>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+
+<section class="section mx-4 pb-0">
+  <div class="bg-shape-top-right py-20 lg:py-24 2xl:py-32" {{ partial `bg-image.html` (dict `Src` "images/bg-shape.png" )
+    | safeHTMLAttr }}>
+    <div class="container z-10 relative">
+      <div class="max-w-2xl mx-auto pb-8 text-center">
+        <h2 class="h1 pb-4" data-aos="fade-up-sm">{{ .Params.open_positions.title | markdownify }}</h2>
+        <p data-aos="fade-up-sm" data-aos-delay="50">{{ .Params.open_positions.description | markdownify }}</p>
+      </div>
+      <div data-aos="fade-up-sm" data-aos-delay="100">
+        <ul
+          class="shuffle-filter flex flex-wrap items-center justify-center gap-6 mb-14 bg-white w-fit mx-auto p-6 sm:p-2 border rounded">
+          <li
+            class="selected-position px-10 py-3 cursor-pointer min-w-36 text-center tab-nav-border text-lg transition duration-500"
+            data-target='all'>
+            {{ T "all" }}
+          </li>
+          {{ $section := site.GetPage "career" }}
+          {{ $seen := slice }}
+          {{ range $section.RegularPages }}
+          {{ $categories := slice .Params.job_details.category }}
+          {{ range $categories }}
+          {{ if not (in $seen .) }}
+          <li data-target='{{ . }}'
+            class="min-w-36 px-10 py-3 text-center cursor-pointer tab-nav-border text-lg transition duration-500">
+            {{ . }}
+          </li>
+          {{ $seen = $seen | append . }}
+          {{ end }}
+          {{ end }}
+          {{ end }}
+        </ul>
+
+        <div class="shuffle-container row g-4">
+          {{ $section := site.GetPage "career" }}
+          {{ range $section.RegularPages }}
+          {{ $categories := slice .Params.job_details.category }}
+          <div class="shuffle-item lg:col-6" data-groups='["all"{{ range $categories }}, "{{ . }}"{{ end }}]'>
+            <div class="p-5 md:p-10 rounded-lg bg-white h-full">
+              <h3 class="pb-4">
+                <a href="{{ .RelPermalink }}" class="hover:text-primary transition duration-300">
+                  {{ .Title | markdownify }}
+                </a>
+              </h3>
+              <p class="pb-6">{{ .Params.job_details.location | markdownify }}</p>
+              <p class="font-secondary text-dark text-lg pb-12 flex items-center gap-2">
+                <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M8.50131 15.3327C7.05091 15.3327 5.63308 14.9026 4.42712 14.0968C3.22116 13.291 2.28123 12.1457 1.72619 10.8057C1.17115 9.46571 1.02592 7.99122 1.30888 6.56869C1.59184 5.14616 2.29027 3.83949 3.31586 2.8139C4.34144 1.78832 5.64812 1.08989 7.07064 0.806927C8.49317 0.523969 9.96766 0.669193 11.3077 1.22424C12.6476 1.77928 13.793 2.71921 14.5988 3.92517C15.4045 5.13113 15.8346 6.54896 15.8346 7.99935C15.8346 9.94427 15.062 11.8095 13.6868 13.1848C12.3115 14.5601 10.4462 15.3327 8.50131 15.3327ZM8.50131 1.99935C7.31462 1.99935 6.15458 2.35125 5.16788 3.01053C4.18119 3.66982 3.41215 4.60689 2.95803 5.70325C2.5039 6.79961 2.38508 8.00601 2.61659 9.16989C2.84811 10.3338 3.41955 11.4029 4.25866 12.242C5.09778 13.0811 6.16688 13.6526 7.33076 13.8841C8.49465 14.1156 9.70105 13.9968 10.7974 13.5426C11.8938 13.0885 12.8308 12.3195 13.4901 11.3328C14.1494 10.3461 14.5013 9.18604 14.5013 7.99935C14.5013 6.40805 13.8692 4.88193 12.7439 3.75671C11.6187 2.63149 10.0926 1.99935 8.50131 1.99935ZM10.448 10.7194C10.3602 10.7199 10.2733 10.703 10.192 10.6699C10.1108 10.6367 10.0369 10.5878 9.97464 10.526L8.02797 8.57269C7.90481 8.44851 7.83538 8.28091 7.83464 8.10602V3.99935C7.83464 3.82254 7.90488 3.65297 8.0299 3.52795C8.15493 3.40292 8.32449 3.33269 8.50131 3.33269C8.67812 3.33269 8.84769 3.40292 8.97271 3.52795C9.09773 3.65297 9.16797 3.82254 9.16797 3.99935V7.82602L10.9213 9.57935C10.9838 9.64133 11.0334 9.71506 11.0672 9.7963C11.1011 9.87754 11.1185 9.96468 11.1185 10.0527C11.1185 10.1407 11.1011 10.2278 11.0672 10.3091C11.0334 10.3903 10.9838 10.464 10.9213 10.526C10.859 10.5878 10.7851 10.6367 10.7039 10.6699C10.6227 10.703 10.5357 10.7199 10.448 10.7194Z"
+                    fill="currentColor" />
+                </svg>
+                {{ .Params.job_details.job_nature | markdownify }} | Salary: {{ .Params.job_details.salary | markdownify }}
+              </p>
+              <div class="inline-block">
+                <a class="btn btn-outline-primary" href="{{ .RelPermalink }}">
+                  {{ T "apply_now" }}
+                  <svg class="w-3 sm:w-4" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+                      fill="currentColor"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+{{ with .Params.testimonial }}
+<section class="section">
+  <div class="container">
+    <h2 class="h1 max-w-3xl mx-auto text-center pb-14" data-aos="fade-up-sm">{{ .title | markdownify }}</h2>
+    <div class="row g-4" data-aos="fade-up-sm" data-aos-delay="50">
+      {{ $number := .visible_testimonial }}
+      {{ with site.GetPage "sections/testimonial" }}
+      {{ $testimonials := .Params.testimonial_cart }}
+      {{ $count := 0 }}
+      {{ range $testimonials }}
+      {{ if lt $count $number }}
+      <div class="md:col-6 lg:col-4">
+        <div class="p-5 sm:p-10 border border-primary rounded-lg h-full">
+          <p class="flex items-start gap-1 text-dark">
+            <svg class="shrink-0 w-3 text-primary" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M7.67225 0.938477L7.0625 0.000976562C2.84375 2.83673 0.5 6.28223 0.5 9.11798C0.5 11.86 2.516 13.1492 4.22675 13.1492C6.383 13.1492 7.90625 11.3207 7.90625 9.39923C7.90625 7.78223 6.875 6.39923 5.492 5.88323C5.09375 5.74223 4.71875 5.62523 4.71875 4.94573C4.71875 4.07873 5.35175 2.79023 7.67225 0.938477ZM16.9767 0.938477L16.367 0.000976562C12.1947 2.83673 9.8045 6.28223 9.8045 9.11798C9.8045 11.86 11.867 13.1492 13.5778 13.1492C15.7572 13.1492 17.3045 11.3207 17.3045 9.39923C17.3045 7.78223 16.25 6.39923 14.8197 5.88323C14.4215 5.74223 14.0697 5.62523 14.0697 4.94573C14.0697 4.07873 14.726 2.78948 16.976 0.937727L16.9767 0.938477Z"
+                fill="currentColor"></path>
+            </svg>
+            {{ .post | markdownify }}
+          </p>
+          <div class="flex items-center gap-3 pt-5">
+            {{ partial "image" (dict "Src" .image "Alt" "image" "Class" "w-10 h-10 rounded-xl") }}
+            <div class="">
+              <p class="font-semibold text-dark">{{ .name | markdownify }}</p>
+              <p class="text-sm text-primary">{{ .designation | markdownify }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{ $count = add $count 1 }}
+      {{ end }}
+      {{ end }}
+      {{ end }}
+      {{ if .button.enable }}
+      <div class="block w-fit mx-auto mt-14" data-aos="fade-up-sm" data-aos-delay="100">
+        <a href="{{ .button.link }}" class="btn btn-primary">
+          {{ .button.label | markdownify }}
+          <svg class="w-3 sm:w-4" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+              fill="currentColor"></path>
+          </svg>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+
+<!-- Call to action -->
+{{ partial "call-to-action.html" . }}
+<!-- /Call to action -->
+
+{{ end }}

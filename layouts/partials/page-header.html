@@ -1,0 +1,16 @@
+<section class="mx-4">
+  <div
+    class="bg-shape-top-right"
+    {{ partial `bg-image.html` (dict `Src` "images/bg-shape.png" ) | safeHTMLAttr }}>
+    <div class="container text-center py-20 lg:py-24 2xl:py-32 px-8">
+      <div class="bg-theme-light rounded-2xl inline">
+        <h1 data-aos="fade-up-sm">
+          {{ T (printf "%s" (lower .Title)) | default .Title | title }}
+        </h1>
+        <div data-aos="fade-up-sm" data-aos-delay="50">
+          {{ partial "components/breadcrumb" (dict "Context" . "Class" "mt-6") }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

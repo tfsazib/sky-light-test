@@ -1,0 +1,112 @@
+#################### default parameters ################################
+# favicon module: https://github.com/gethugothemes/hugo-modules/tree/master/images#favicon-implementation
+favicon = "images/favicon.png"
+# logo module: https://github.com/gethugothemes/hugo-modules/tree/master/images#logo-implementation
+logo = "images/logo.png"
+# footer logo
+footer_logo = "images/footer-logo.png"
+# use `px` or `x` with logo_width, example: "100px".
+# Note: logo_width is not work with .svg file
+logo_width = "160px"
+logo_height = "32px"
+# if logo_webp set false, will not generate WEBP version of logo | default is true
+logo_webp = true
+# logo text will only show when logo is missing.
+logo_text = "Skylight"
+# navbar fixed to top
+navbar_fixed = true
+# Main Sections
+mainSections = ["blog"]
+# contact form action
+contact_form_action = "#" # contact form works with [https://airform.io/] or [https://formspree.io]
+# google tag manager, see https://developers.google.com/tag-manager/
+google_tag_manager = "" # example: G-XXXXXXXXXX
+# custom script on header, example: custom_script= "<script>console.log(\"Hello World\")</script>"
+custom_script = ""
+# copyright
+copyright = "Designed & Developed by [Themefisher](https://themefisher.com/)"
+# social media description
+social_media_description = "Be the first one to know about discounts, offers, news, giveaways and events"
+
+#footer description
+footer_description = "We ara a lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
+footer_description_02 = "Be the first one to know about discounts, offers, news, giveaways and events"
+
+# Navigation button
+[navigation_button_sign_in]
+enable = true
+label = "Sign In"
+link = "#"
+
+# Navigation button
+[navigation_button]
+enable = true
+label = "Get Started"
+link = "/pricing"
+
+# seo meta data for OpenGraph / Twitter Card
+# seo module: https://github.com/gethugothemes/hugo-modules/tree/master/seo-tools/basic-seo
+[metadata]
+keywords = ["Boilerplate", "Hugo"]
+description = "Hugo & Tailwindcss Starter"
+author = "zeon.studio"
+image = "images/og-image.png"
+
+
+# site verifications
+# verification module: https://github.com/gethugothemes/hugo-modules/tree/master/seo-tools/site-verifications
+[site_verification]
+google = ""   # Your verification code
+bing = ""     # Your verification code
+baidu = ""    # Your verification code
+facebook = "" # Your verification code
+mastodon = "" # Your verification code
+
+# cookies
+# cookies module: https://github.com/gethugothemes/hugo-modules/tree/master/components/cookie-consent
+[cookies]
+enable = false
+expire_days = 60
+content = "This site uses cookies. By continuing to use this website, you agree to their use."
+button = "I Accept"
+
+
+######################## sidebar widgets #########################
+[widgets]
+sidebar = ["recent-posts", "categories" ]
+
+
+########################### footer contact info ############################
+[[footer_contact_info]]
+icon = "fa-solid fa-phone"
+title = "310-437-2766"
+link = "tel:3104372766"
+
+[[footer_contact_info]]
+icon = "fa-solid fa-envelope"
+title = "unreal@outlook.com"
+link = "mailto:unreal@outlook.com"
+
+[[footer_contact_info]]
+icon = "fa-solid fa-location-dot"
+title = "706 Campfire Ave, CT 06450"
+link = "#!"  # Assuming there's no link for the location
+
+########################### contact info ############################
+[[contact_info]]
+icon = "fa-solid fa-phone"
+title = "Phone Number"
+content = "(239) 555-0108"
+link = "tel:239555-0108"
+
+[[contact_info]]
+icon = "fa-solid fa-envelope"
+title = "Email"
+content = "saaspro@gmail.com"
+link = "mailto:saaspro@gmail"
+
+[[contact_info]]
+icon = "fa-solid fa-location-dot"
+title = "Address"
+content = "3517 W. Gray St. Utica, Pennsylvania 57867"
+link = "#!"

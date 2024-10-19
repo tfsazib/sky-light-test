@@ -1,0 +1,152 @@
+############# English navigation ##############
+
+# main menu
+[[main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[main]]
+name = "About"
+url = "/about"
+weight = 2
+
+[[main]]
+name = "Pricing"
+url = "/pricing"
+weight = 3
+
+[[main]]
+name = "Contact"
+url = "/contact"
+weight = 4
+
+[[main]]
+weight = 5
+name = "Pages"
+
+[[main]]
+parent = "Pages"
+name = "Services"
+url = "/services"
+weight = 1
+
+[[main]]
+parent = "Pages"
+name = "Service Details"
+url = "/services/service-1"
+weight = 2
+
+[[main]]
+parent = "Pages"
+name = "Blog"
+url = "/blog"
+weight = 3
+
+[[main]]
+parent = "Pages"
+name = "Blog Details"
+url = "/blog/post-1"
+weight = 4
+
+[[main]]
+parent = "Pages"
+name = "Our Team"
+url = "/our-team"
+weight = 5
+
+[[main]]
+parent = "Pages"
+name = "FAQ"
+url = "/faq"
+weight = 6
+
+[[main]]
+parent = "Pages"
+name = "Case Studies"
+url = "/case-studies"
+weight = 7
+
+[[main]]
+parent = "Pages"
+name = "Case Studies Details"
+url = "/case-studies/case-studies-1"
+weight = 8
+
+[[main]]
+parent = "Pages"
+name = "Career"
+url = "/career"
+weight = 9
+
+[[main]]
+parent = "Pages"
+name = "Career Details"
+url = "/career/career-1"
+weight = 10
+
+[[main]]
+parent = "Pages"
+name = "Terms and Conditions"
+url = "/terms-conditions"
+weight = 11
+
+
+# footer menu
+# Company
+[[company_footer]]
+name = "About us"
+url = "/about"
+weight = 1
+
+[[company_footer]]
+name = "Service"
+url = "/service"
+weight = 2
+
+[[company_footer]]
+name = "Team"
+url = "/our-team"
+weight = 3
+
+[[company_footer]]
+name = "Contact"
+url = "/contact"
+weight = 4
+
+[[company_footer]]
+name = "Terms of Use"
+url = "/terms-conditions"
+weight = 5
+
+
+# Product
+[[product_footer]]
+name = "Services"
+url = "/services"
+weight = 1
+
+[[product_footer]]
+name = "Pricing"
+url = "/pricing"
+weight = 2
+
+# Utility Pages
+[[utility_pages_footer]]
+name = "Changelog"
+url = "/changelog"
+weight = 1
+
+[[utility_pages_footer]]
+name = "Team"
+url = "/our-team"
+weight = 2
+
+[[utility_pages_footer]]
+name = "Error 404"
+url = "/404"
+weight = 3
+
+
+
+

@@ -1,0 +1,219 @@
+{{ define "main" }}
+  {{ partial "page-header" . }}
+
+
+  <section class="section pb-0">
+    <div class="container">
+      <div class="row justify-center">
+        <div class="lg:col-10">
+          <div class="row g-4">
+            <div class="lg:col-8 content">
+              <div class="mb-10">
+                {{ .Content }}
+              </div>
+            </div>
+            {{ with .Params.job_details }}
+              <div class="lg:col-4">
+                <div class="bg-theme-light p-5 sm:px-6 sm:py-14">
+                  <h5 class="border-b border-border pb-4 font-semibold">
+                    {{ T "job_details" }}
+                  </h5>
+                  <div class="flex gap-5 py-5">
+                    <i class="fa-solid fa-briefcase text-2xl"></i>
+                    <div>
+                      <h6 class="font-semibold pb-2">{{ T "department" }}</h6>
+                      <p class="text-dark">{{ .category | markdownify }}</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-5 py-5">
+                    <i class="fa-solid fa-calendar-days text-2xl"></i>
+                    <div>
+                      <h6 class="font-semibold pb-2">
+                        {{ T "expiration_date" }}
+                      </h6>
+                      <p class="text-dark">
+                        {{ .date | time.Format "January 2, 2006" }}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex gap-5 py-5">
+                    <i class="fa-solid fa-cart-flatbed-suitcase text-2xl"></i>
+                    <div>
+                      <h6 class="font-semibold pb-2">{{ T "job_type" }}</h6>
+                      <p class="text-dark">{{ .job_nature | markdownify }}</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-5 py-5">
+                    <i class="fa-solid fa-location-crosshairs text-2xl"></i>
+                    <div>
+                      <h6 class="font-semibold pb-2">{{ T "location" }}</h6>
+                      <p class="text-dark">{{ .location | markdownify }}</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-5 py-5">
+                    <i class="fa-solid fa-wallet text-2xl"></i>
+                    <div>
+                      <h6 class="font-semibold pb-2">{{ T "salary" }}</h6>
+                      <p class="text-dark">{{ .salary | markdownify }}</p>
+                    </div>
+                  </div>
+                  <button
+                    class="btn btn-primary w-full bg-primary border-primary hover:border-black mt-5">
+                    {{ T "apply_for_this_job" }}
+                  </button>
+                </div>
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section pb-0">
+    <div class="container">
+      <div class="row justify-between g-4">
+        <div class="lg:col-5">
+          <h2>{{ .Params.job_details.contact_title | markdownify }}</h2>
+          <p class="pt-6">
+            {{ .Params.job_details.contact_description | markdownify }}
+          </p>
+          <div class="pt-14">
+            {{ range site.Params.contact_info }}
+              <div class="flex gap-4 mb-6">
+                <i class="{{ .icon }} text-3xl text-dark"></i>
+                <div>
+                  <h4 class="font-medium text-2xl pb-2">
+                    {{ .title | markdownify }}
+                  </h4>
+                  <a
+                    href="{{ .link | safeURL }}"
+                    class="hover:text-primary transition duration-300">
+                    <span>{{ .content | markdownify }}</span>
+                  </a>
+                </div>
+              </div>
+            {{ end }}
+          </div>
+        </div>
+        <div class="lg:col-7 xl:col-6">
+          <form
+            action="{{ site.Params.contact_form_action }}"
+            method="POST"
+            class="border border-primary rounded-lg bg-body px-5 lg:px-10 py-14">
+            <div class="row g-4 mb-8">
+              <div class="lg:col-6">
+                <label class="form-label" for="name">{{ T "name" }}</label>
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Enter your Name"
+                  class="form-input border border-border bg-theme-light" />
+              </div>
+              <div class="lg:col-6">
+                <label class="form-label" for="email"
+                  >{{ T "email_address" }}</label
+                >
+                <input
+                  type="text"
+                  id="email"
+                  placeholder="Enter your Email"
+                  class="form-input border border-border bg-theme-light" />
+              </div>
+            </div>
+            <div class="mb-8">
+              <label class="form-label" for="message">{{ T "message" }}</label>
+              <textarea
+                name="message"
+                id="message"
+                placeholder="Hey! I Would Like To Get In Touch Because......."
+                class="form-input border border-border bg-theme-light h-44"></textarea>
+            </div>
+            <button class="btn btn-primary">
+              {{ T "send_message" }}
+              <svg
+                class="w-3 sm:w-4"
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+                  fill="currentColor"></path>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div
+      class="bg-shape-top-right py-20 lg:py-24 2xl:py-32"
+      {{ partial `bg-image.html` (dict `Src` "images/bg-shape.png" ) | safeHTMLAttr }}>
+      <div class="container relative z-10">
+        <h1 class="pb-14 text-center text-primary">{{ T "related_jobs" }}</h1>
+
+        {{ $currentPage := . }}
+        {{ $currentCategory := $currentPage.Params.job_details.category }}
+
+        {{ $relatedPages := where (where site.RegularPages "Section" "career") "Params.job_details.category" $currentCategory }}
+        {{ $limitedRelatedPages := first 4 $relatedPages }}
+
+
+        <div class="row g-4">
+          {{ range $limitedRelatedPages }}
+            <div class="lg:col-6">
+              <div class="p-5 md:p-10 rounded-lg bg-white h-full">
+                <h3 class="pb-4">
+                  <a
+                    href="{{ .RelPermalink }}"
+                    class="hover:text-primary transition duration-300">
+                    {{ .Title | markdownify }}
+                  </a>
+                </h3>
+                <p class="pb-8">{{ .Params.job_details.location }}</p>
+                <p class="font-secondary text-lg pb-12 flex items-center gap-2">
+                  <svg
+                    width="17"
+                    height="16"
+                    viewBox="0 0 17 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.50131 15.3327C7.05091 15.3327 5.63308 14.9026 4.42712 14.0968C3.22116 13.291 2.28123 12.1457 1.72619 10.8057C1.17115 9.46571 1.02592 7.99122 1.30888 6.56869C1.59184 5.14616 2.29027 3.83949 3.31586 2.8139C4.34144 1.78832 5.64812 1.08989 7.07064 0.806927C8.49317 0.523969 9.96766 0.669193 11.3077 1.22424C12.6476 1.77928 13.793 2.71921 14.5988 3.92517C15.4045 5.13113 15.8346 6.54896 15.8346 7.99935C15.8346 9.94427 15.062 11.8095 13.6868 13.1848C12.3115 14.5601 10.4462 15.3327 8.50131 15.3327ZM8.50131 1.99935C7.31462 1.99935 6.15458 2.35125 5.16788 3.01053C4.18119 3.66982 3.41215 4.60689 2.95803 5.70325C2.5039 6.79961 2.38508 8.00601 2.61659 9.16989C2.84811 10.3338 3.41955 11.4029 4.25866 12.242C5.09778 13.0811 6.16688 13.6526 7.33076 13.8841C8.49465 14.1156 9.70105 13.9968 10.7974 13.5426C11.8938 13.0885 12.8308 12.3195 13.4901 11.3328C14.1494 10.3461 14.5013 9.18604 14.5013 7.99935C14.5013 6.40805 13.8692 4.88193 12.7439 3.75671C11.6187 2.63149 10.0926 1.99935 8.50131 1.99935ZM10.448 10.7194C10.3602 10.7199 10.2733 10.703 10.192 10.6699C10.1108 10.6367 10.0369 10.5878 9.97464 10.526L8.02797 8.57269C7.90481 8.44851 7.83538 8.28091 7.83464 8.10602V3.99935C7.83464 3.82254 7.90488 3.65297 8.0299 3.52795C8.15493 3.40292 8.32449 3.33269 8.50131 3.33269C8.67812 3.33269 8.84769 3.40292 8.97271 3.52795C9.09773 3.65297 9.16797 3.82254 9.16797 3.99935V7.82602L10.9213 9.57935C10.9838 9.64133 11.0334 9.71506 11.0672 9.7963C11.1011 9.87754 11.1185 9.96468 11.1185 10.0527C11.1185 10.1407 11.1011 10.2278 11.0672 10.3091C11.0334 10.3903 10.9838 10.464 10.9213 10.526C10.859 10.5878 10.7851 10.6367 10.7039 10.6699C10.6227 10.703 10.5357 10.7199 10.448 10.7194Z"
+                      fill="currentColor" />
+                  </svg>
+                  {{ .Params.job_details.job_nature }} | Salary:
+                  {{ .Params.job_details.salary }}
+                </p>
+                <div class="inline-block">
+                  <a class="btn btn-outline-primary" href="{{ .RelPermalink }}">
+                    {{ T "apply_now" }}
+                    <svg
+                      class="w-3 sm:w-4"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+                        fill="currentColor"></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to action -->
+  {{ partial "call-to-action.html" . }}
+  <!-- /Call to action -->
+{{ end }}

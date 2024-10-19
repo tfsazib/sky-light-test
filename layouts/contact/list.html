@@ -1,0 +1,150 @@
+{{ define "main" }}
+  {{ partial "page-header" . }}
+
+
+  <section class="section pb-0" data-aos="fade-up-sm" data-aos-delay="100">
+    <div class="container">
+      <div class="row g-4 justify-center">
+        {{ range .Params.list }}
+          <div class="sm:col-6 lg:col-4">
+            <div class="bg-dark rounded-lg p-10 text-center">
+              <div
+                class="bg-body p-5 w-14 h-14 mx-auto flex items-center justify-center rounded-full">
+                <i class="{{ .icon }} text-primary text-xl"></i>
+              </div>
+              <h5 class="text-body py-4">{{ .title | markdownify }}</h5>
+              <p class="text-body">
+                {{ .description | markdownify }}
+              </p>
+            </div>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div
+      class="bg-shape-top-right py-20 lg:py-24 2xl:py-32"
+      {{ partial `bg-image.html` (dict `Src` "images/bg-shape.png" ) | safeHTMLAttr }}>
+      <div class="container z-10 relative">
+        <div class="row g-4 justify-between items-center">
+          <div
+            class="md:col-6 lg:col-7 xl:col-6"
+            data-aos="fade-right-sm"
+            data-aos-delay="50">
+            <form
+              action="{{ site.Params.contact_form_action }}"
+              method="POST"
+              class="border border-primary rounded-lg bg-body px-5 lg:px-10 py-14">
+              <div class="row g-4 mb-8">
+                <div class="lg:col-6">
+                  <label class="form-label" for="name">{{ T "name" }}</label>
+                  <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your Name"
+                    class="form-input border border-border bg-theme-light" />
+                </div>
+                <div class="lg:col-6">
+                  <label class="form-label" for="email"
+                    >{{ T "email_address" }}</label
+                  >
+                  <input
+                    type="text"
+                    id="email"
+                    placeholder="Enter your Email"
+                    class="form-input border border-border bg-theme-light" />
+                </div>
+              </div>
+              <div class="row g-4 mb-8">
+                <div class="lg:col-6">
+                  <label class="form-label" for="phone">{{ T "phone" }}</label>
+                  <input
+                    type="text"
+                    id="phone"
+                    placeholder="+880180000000"
+                    class="form-input border border-border bg-theme-light" />
+                </div>
+                <div class="lg:col-6">
+                  <label class="form-label" for="email"
+                    >{{ T "company" }}</label
+                  >
+                  <input
+                    type="text"
+                    id="email"
+                    placeholder="Your Company Name"
+                    class="form-input border border-border bg-theme-light" />
+                </div>
+              </div>
+              <div class="mb-8">
+                <label class="form-label" for="message"
+                  >{{ T "message" }}</label
+                >
+                <textarea
+                  name="message"
+                  id="message"
+                  placeholder="Hey! I Would Like To Get In Touch Because......."
+                  class="form-input border border-border bg-theme-light h-44"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                {{ T "send_message" }}
+                <svg
+                  class="w-3 sm:w-4"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+                    fill="currentColor" />
+                </svg>
+              </button>
+            </form>
+          </div>
+          <div
+            class="md:col-6 lg:col-5 pt-10 md:pt-0"
+            data-aos="fade-left-sm"
+            data-aos-delay="50">
+            {{ with .Params.info }}
+              <h2 class="pb-6">{{ .title | markdownify }}</h2>
+              <p>{{ .description | markdownify }}</p>
+            {{ end }}
+            <ul class="social-icons flex items-center gap-5 my-10">
+              {{ range site.Data.social.main }}
+                <li>
+                  <a
+                    class="!bg-body p-2 shadow rounded-full hover:!bg-primary transition duration-300 group"
+                    target="_blank"
+                    aria-label="{{ .name }}"
+                    rel="nofollow noopener"
+                    href="{{ .link | safeURL }}">
+                    <i
+                      class="{{ .icon }} text-primary group-hover:text-body"></i>
+                  </a>
+                </li>
+              {{ end }}
+            </ul>
+
+            {{ range site.Params.contact_info }}
+              <div class="flex gap-4 mb-6">
+                <i class="{{ .icon }} text-3xl text-dark"></i>
+                <div>
+                  <h4 class="font-medium text-2xl pb-2">
+                    {{ .title | markdownify }}
+                  </h4>
+                  <a
+                    href="{{ .link | safeURL }}"
+                    class="hover:text-primary transition duration-300">
+                    <span>{{ .content | markdownify }}</span>
+                  </a>
+                </div>
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

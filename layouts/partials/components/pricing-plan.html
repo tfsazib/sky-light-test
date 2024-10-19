@@ -1,0 +1,248 @@
+<div class="container relative z-10">
+  <div class="row justify-center ">
+    <div class="tab" data-tab-group="tab-group-title">
+      <div class="xl:col-10 mx-auto" data-aos="fade-up-sm" data-aos-delay="100">
+        <div class="flex justify-center mb-14 gap-6 sm:gap-10" data-tab-nav="">
+          <button
+            class="btn btn-outline-primary tab-nav-item active"
+            tabindex="0"
+            data-tab="0">
+            {{ T "monthly" }}
+          </button>
+          <button
+            class="btn btn-outline-primary tab-nav-item"
+            tabindex="-1"
+            data-tab="1">
+            {{ T "yearly" }}
+          </button>
+        </div>
+        <div class="tab-content" data-tab-content>
+          <div class="tab-content-panel active" data-tab-panel="0">
+            <div class="row g-4">
+              {{ with site.GetPage "sections/pricing-plan" }}
+                {{ range .Params.pricing_card }}
+                  <div class="sm:col-6 lg:col-4">
+                    <div
+                      class="bg-white border border-border hover:border-primary rounded-lg {{ if .popularity.enable }}
+                        border-primary
+                      {{ end }}"
+                      data-tab-panel="0">
+                      <div class="p-5 md:p-8">
+                        <div class="flex items-center justify-between mb-5">
+                          <div
+                            class="w-14 h-14 rounded-full bg-theme-light flex items-center justify-center">
+                            {{ if .popularity.enable }}
+                              <svg
+                              class="text-primary"
+                                width="29"
+                                height="20"
+                                viewBox="0 0 29 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M14.5 13.001V19.001M14.5 13.001C21.6797 13.001 27.5 10.3147 27.5 7.00098M14.5 13.001C7.3203 13.001 1.5 10.3147 1.5 7.00098M14.5 19.001C6.5 19.001 1.5 16.001 1.5 13.001V7.00098M14.5 19.001C22.5 19.001 27.5 16.001 27.5 13.001V7.00098M27.5 7.00098C27.5 3.68727 21.6797 1.00098 14.5 1.00098C7.3203 1.00098 1.5 3.68727 1.5 7.00098M22.5 11.7643V17.7644M6.5 11.7643V17.7644"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                              </svg>
+                            {{ else }}
+                              <svg
+                                class="text-primary"
+                                width="31"
+                                height="25"
+                                viewBox="0 0 31 25"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M29.5 9.00098L22.5 1.00098H8.5L1.5 9.00098M29.5 9.00098L15.5 24.001M29.5 9.00098H1.5M15.5 24.001L1.5 9.00098M15.5 24.001L21.6364 9.00098L15.5 1.00098L9.36362 9.00098L15.5 24.001Z"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                              </svg>
+                            {{ end }}
+                          </div>
+                          {{ if .popularity.enable }}
+                            <p
+                              class="text-primary bg-theme-light px-2 py-1 rounded border border-primary float-right">
+                              {{ .popularity.content | markdownify }}
+                            </p>
+                          {{ end }}
+                        </div>
+                        <p class="text-xl font-semibold text-primary pb-2">
+                          {{ .title | markdownify }}
+                        </p>
+                        <div class="flex items-center gap-2 pb-5">
+                          <h2 class="h1">
+                            {{ .currency }}{{ .monthly_price }}
+                          </h2>
+                          <h5 class="text-text font-medium">/mth</h5>
+                        </div>
+                        <p>{{ .content | markdownify }}</p>
+                      </div>
+                      <div class="p-5 md:p-8 border-t border-border">
+                        <ul class="mb-8 row g-3">
+                          {{ range .monthly_services }}
+                            <li class="flex items-center gap-2">
+                              <svg
+                                class="text-primary"
+                                width="21"
+                                height="20"
+                                viewBox="0 0 21 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M14.625 7.75098L9.12497 13.001L6.375 10.376M19.5 10.001C19.5 14.9715 15.4706 19.001 10.5 19.001C5.52944 19.001 1.5 14.9715 1.5 10.001C1.5 5.03041 5.52944 1.00098 10.5 1.00098C15.4706 1.00098 19.5 5.03041 19.5 10.001Z"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                              </svg>
+                              {{ . }}
+                            </li>
+                          {{ end }}
+                        </ul>
+                        {{ if .button.enable }}
+                          <div class="inline-block">
+                            <a
+                              class="btn btn-primary"
+                              href="{{ .button.link }}">
+                              {{ .button.label | markdownify }}
+                              <svg
+                                class="w-3 sm:w-4"
+                                width="14"
+                                height="14"
+                                viewBox="0 0 14 14"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+                                  fill="currentColor" />
+                              </svg>
+                            </a>
+                          </div>
+                        {{ end }}
+                      </div>
+                    </div>
+                  </div>
+                {{ end }}
+              {{ end }}
+            </div>
+          </div>
+          <div class="tab-content-panel active" data-tab-panel="1">
+            <div class="row g-4">
+              {{ with site.GetPage "sections/pricing-plan" }}
+                {{ range .Params.pricing_card }}
+                  <div class="sm:col-6 lg:col-4">
+                    <div
+                      class="bg-white border hover:border-primary rounded-lg {{ if .popularity.enable }}
+                        border-primary
+                      {{ end }}"
+                      data-tab-panel="0">
+                      <div class="p-5 md:p-8">
+                        <div class="flex items-center justify-between pb-5">
+                          <div
+                            class="w-14 h-14 rounded-full bg-theme-light flex items-center justify-center">
+                            {{ if .popularity.enable }}
+                              <svg
+                              class="text-primary"
+                                width="29"
+                                height="20"
+                                viewBox="0 0 29 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M14.5 13.001V19.001M14.5 13.001C21.6797 13.001 27.5 10.3147 27.5 7.00098M14.5 13.001C7.3203 13.001 1.5 10.3147 1.5 7.00098M14.5 19.001C6.5 19.001 1.5 16.001 1.5 13.001V7.00098M14.5 19.001C22.5 19.001 27.5 16.001 27.5 13.001V7.00098M27.5 7.00098C27.5 3.68727 21.6797 1.00098 14.5 1.00098C7.3203 1.00098 1.5 3.68727 1.5 7.00098M22.5 11.7643V17.7644M6.5 11.7643V17.7644"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                              </svg>
+                            {{ else }}
+                              <svg
+                                class="text-primary"
+                                width="31"
+                                height="25"
+                                viewBox="0 0 31 25"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M29.5 9.00098L22.5 1.00098H8.5L1.5 9.00098M29.5 9.00098L15.5 24.001M29.5 9.00098H1.5M15.5 24.001L1.5 9.00098M15.5 24.001L21.6364 9.00098L15.5 1.00098L9.36362 9.00098L15.5 24.001Z"
+                                  stroke="currentColor"
+                                  stroke-width="2"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                              </svg>
+                            {{ end }}
+                          </div>
+                          {{ if .popularity.enable }}
+                            <p
+                              class="text-primary bg-theme-light px-2 py-1 rounded border border-primary float-right">
+                              {{ .popularity.content | markdownify }}
+                            </p>
+                          {{ end }}
+                        </div>
+                        <p class="text-xl font-semibold text-primary pb-2">
+                          {{ .title | markdownify }}
+                        </p>
+                        <div class="flex items-center gap-2 pb-5">
+                          <h2 class="h1">{{ .currency }}{{ .yearly_price }}</h2>
+                          <h5 class="text-text font-medium">/year</h5>
+                        </div>
+                        <p>{{ .content | markdownify }}</p>
+                      </div>
+                      <div class="p-5 md:p-8 border-t border-border">
+                        <ul class="mb-8 row g-3">
+                          {{ range .yearly_services }}
+                            <li class="flex items-center gap-2">
+                              <svg
+                                class="text-primary"
+                                width="21"
+                                height="20"
+                                viewBox="0 0 21 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M14.625 7.75098L9.12497 13.001L6.375 10.376M19.5 10.001C19.5 14.9715 15.4706 19.001 10.5 19.001C5.52944 19.001 1.5 14.9715 1.5 10.001C1.5 5.03041 5.52944 1.00098 10.5 1.00098C15.4706 1.00098 19.5 5.03041 19.5 10.001Z"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                              </svg>
+                              {{ . }}
+                            </li>
+                          {{ end }}
+                        </ul>
+                        {{ if .button.enable }}
+                          <div class="inline-block">
+                            <a
+                              class="btn btn-primary"
+                              href="{{ .button.link }}">
+                              {{ .button.label | markdownify }}
+                              <svg
+                                class="w-3 sm:w-4"
+                                width="14"
+                                height="14"
+                                viewBox="0 0 14 14"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+                                  fill="currentColor" />
+                              </svg>
+                            </a>
+                          </div>
+                        {{ end }}
+                      </div>
+                    </div>
+                  </div>
+                {{ end }}
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

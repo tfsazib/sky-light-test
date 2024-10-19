@@ -1,0 +1,24 @@
+{
+  "main": [
+    {
+      "name": "facebook",
+      "icon": "fa-brands fa-facebook",
+      "link": "https://www.facebook.com/"
+    },
+    {
+      "name": "youtube",
+      "icon": "fa-brands fa-youtube",
+      "link": "https://youtube.com/"
+    },
+    {
+      "name": "whatsapp",
+      "icon": "fa-brands fa-whatsapp",
+      "link": "tel:0180000000"
+    },
+    {
+      "name": "figma",
+      "icon": "fa-brands fa-figma",
+      "link": "https://www.figma.com/"
+    }
+  ]
+}

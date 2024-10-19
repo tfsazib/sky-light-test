@@ -1,0 +1,30 @@
+{{ define "main" }}
+  {{ partial "page-header" . }}
+
+
+  <section class="section">
+    <div class="container">
+      <div class="row justify-center">
+        {{ with .Params.case_studies }}
+          <div class="md:col-10 pb-14 text-center">
+            <h1 class="pb-4" data-aos="fade-up-sm" data-aos-delay="100">
+              {{ .title | markdownify }}
+            </h1>
+            <p class="max-w-xl mx-auto" data-aos="fade-up-sm" data-aos-delay="150">
+              {{ .description | markdownify }}
+            </p>
+          </div>
+        {{ end }}
+      </div>
+      <div class="row g-4" data-aos="fade-up-sm" data-aos-delay="200">
+        {{ range .RegularPages }}
+          {{ partial "components/case-studies-cart" . }}
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to action -->
+  {{ partial "call-to-action.html" . }}
+  <!-- /Call to action -->
+{{ end }}

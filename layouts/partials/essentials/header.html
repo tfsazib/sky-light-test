@@ -1,0 +1,160 @@
+<header
+class="header {{ if site.Params.navbar_fixed }}sticky top-0{{ else }}relative {{ end }} z-30">
+  <nav class="navbar container">
+    <!-- logo -->
+    <div class="order-0">
+      <a class="navbar-brand block" href="{{ site.Home.RelPermalink }}">
+        {{ partial "logo" }}
+      </a>
+    </div>
+    <!-- Navbar Toggler -->
+    <input id="nav-toggle" type="checkbox" class="hidden" />
+    <label
+      for="nav-toggle"
+      class="order-3 cursor-pointer flex items-center lg:hidden text-dark lg:order-1">
+      <span
+        id="group-active"
+        class="focus:outline-none z-[100] fixed right-5"
+        title="Menu Toggler">
+        <span
+          class="relative flex items-center justify-center rounded w-[45px] h-[45px] transform transition-all bg-primary ring-0 ring-primary/30 hover:ring-8 hamburger-1 ring-opacity-30 duration-200">
+          <span
+            class="flex flex-col justify-between w-[20px] h-[20px] transform transition-all duration-300 hamburger-2 origin-center">
+            <span
+              class="bg-white h-[2px] w-1/2 rounded transform transition-all duration-300 hamburger-3 origin-right delay-75"></span>
+            <span class="bg-white h-[1px] rounded"></span>
+            <span
+              class="bg-white h-[2px] w-1/2 rounded self-end transform transition-all duration-300 origin-left delay-75 hamburger-4"></span>
+          </span>
+        </span>
+      </span>
+    </label>
+
+    <!-- /navbar toggler -->
+    <ul
+      id="nav-menu"
+      class="navbar-nav order-3 hidden w-full pb-6 lg:order-1 lg:flex lg:w-auto lg:space-x-2 lg:pb-0 xl:space-x-8">
+      {{ $currentPage := . }}
+      {{ range site.Menus.main }}
+        {{ $menuURL := .URL | absLangURL }}
+        {{ $pageURL:= $currentPage.Permalink | absLangURL }}
+        {{ $active := eq $menuURL $pageURL }}
+        {{ if .HasChildren }}
+          <li class="nav-item nav-dropdown group relative">
+            <span
+              class="nav-link group-hover:text-primary {{ range .Children }}
+                {{ $childURL := .URL | absLangURL }}
+                {{ $active := eq $childURL $pageURL }}
+                {{ if $active }}active{{ end }}
+              {{ end }} inline-flex gap-1 items-center">
+              {{ .Name }}
+              <svg
+                class="h-5 w-5 fill-current lg:group-hover:rotate-180 group-hover:text-primary transition duration-300 nav-dropdown-icon"
+                viewBox="0 0 20 20">
+                <path
+                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+              </svg>
+            </span>
+            <ul
+              class="nav-dropdown-list hidden lg:group-hover:block lg:invisible lg:absolute lg:block lg:opacity-0 lg:group-hover:visible lg:group-hover:opacity-100 max-w-[400px] mx-auto">
+              {{ range .Children }}
+                {{ $childURL := .URL | absLangURL }}
+                {{ $active := eq $childURL $pageURL }}
+                <li class="nav-dropdown-item">
+                  <a
+                    class="nav-dropdown-link{{ if $active }}
+                      active
+                    {{- end -}}"
+                    {{ if findRE `^http` .URL }}
+                      target="_blank" rel="noopener"
+                    {{ end }}
+                    href="{{- if findRE `^#` .URL -}}
+                      {{- if not $.IsHome -}}
+                        {{- site.Home.RelPermalink -}}
+                      {{- end }}
+                      {{- .URL -}}
+                    {{- else -}}
+                      {{- .URL | relLangURL -}}
+                    {{- end -}}">
+                    {{ .Name }}
+                  </a>
+                </li>
+              {{ end }}
+            </ul>
+          </li>
+        {{ else }}
+          <li class="nav-item">
+            <a
+              class="nav-link {{ if $active }}active{{- end -}}"
+              {{ if findRE `^http` .URL }}
+                target="_blank" rel="noopener"
+              {{ end }}
+              href="{{- if findRE `^#` .URL -}}
+                {{- if not $.IsHome -}}
+                  {{- site.Home.RelPermalink -}}
+                {{- end }}{{- .URL -}}
+              {{- else -}}
+                {{- .URL | relLangURL -}}
+              {{- end -}}"
+              >{{ .Name }}</a
+            >
+          </li>
+        {{ end }}
+      {{ end }}
+
+
+      <li class="mt-4 block lg:hidden">
+        <a
+          href="{{ site.Params.navigation_button_sign_in.link | relLangURL }}"
+          class="mb-3 hover:text-primary transition duration-300 ">
+          {{ site.Params.navigation_button_sign_in.label }}</a
+        >
+      </li>
+
+      {{ if site.Params.navigation_button.enable }}
+        <li class="mt-4 inline-grid lg:hidden">
+          <a
+            class="btn btn-primary"
+            href="{{ site.Params.navigation_button.link | relLangURL }}">
+            {{ site.Params.navigation_button.label }}
+            <svg
+              class="w-3 sm:w-4"
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+                fill="currentColor" />
+            </svg>
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+    <div class="order-1 ml-auto hidden lg:flex items-center md:order-2 lg:ml-0">
+      <a
+        href="{{ site.Params.navigation_button_sign_in.link | relLangURL }}"
+        class="mr-5 hover:text-primary transition duration-300 ">
+        {{ site.Params.navigation_button_sign_in.label }}
+      </a>
+      {{ if site.Params.navigation_button.enable }}
+        <a
+          class="btn btn-primary"
+          href="{{ site.Params.navigation_button.link | relLangURL }}">
+          {{ site.Params.navigation_button.label }}
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+              fill="currentColor" />
+          </svg>
+        </a>
+      {{ end }}
+    </div>
+  </nav>
+</header>

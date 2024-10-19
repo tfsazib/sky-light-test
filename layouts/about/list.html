@@ -1,0 +1,230 @@
+{{ define "main" }}
+{{with .Params.about_hero}}
+<section class="mx-4 relative">
+  <div class="container">
+    <div class="row justify-center">
+      <div class="md:col-10 pb-10 lg:pb-14 pt-20 lg:pt-24 2xl:pt-32 text-center">
+        <div class="inline-flex items-center gap-2 bg-secondary py-2 px-6 rounded-3xl mb-5" data-aos="fade-up-sm">
+          {{ partial "image" (dict "Src" .sub_title_icon "Alt" "icon" "Class" "h-7 w-7 shrink") }}
+          <p class="text-dark">{{ .sub_title | markdownify}}</p>
+        </div>
+        <h1 class="pb-4 capitalize text-5xl md:text-6xl leading-[55px] md:leading-[76px] font-semibold" data-aos="fade-up-sm" data-aos-delay="50">{{ .title | markdownify }}
+        </h1>
+        <p class="max-w-4xl mx-auto" data-aos="fade-up-sm" data-aos-delay="100">{{ .description | markdownify }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="container relative z-10">
+    {{ partial "image" (dict "Src" .image "Alt" "Banner image" "Class" "rounded-xl") }}
+    <div>
+      {{ $companyLogo := site.GetPage "sections/company-logo" }}
+      {{ partial "components/company-logo.html" $companyLogo }}
+    </div>
+  </div>
+  <div class="bg-shape-top-right w-full h-[calc(70%+3.5rem)] sm:h-[calc(60%+6rem)] !absolute top-0 left-1/2 transform -translate-x-1/2 !-z-10" {{ partial `bg-image.html` (dict `Src` "images/bg-shape.png" ) | safeHTMLAttr }}></div>
+</section>
+{{ end }}
+
+<!--Our Mission/Vision -->
+{{ with .Params.our_mission }}
+<section class="section pb-0 overflow-hidden">
+  <div class="container">
+    <div class="row g-4 xl:g-5 justify-between items-center investment-container">
+      <div class="lg:col-6" data-aos="fade-left-sm">
+        <h2 class="h1 pb-6">{{ .title | markdownify }}</h2>
+        <h5 class="font-secondary text-primary text-xl pb-4">{{ .sort_description | markdownify }}</h5>
+        <p class="pb-8">{{ .description | markdownify }}</p>
+        <div class="bg-black py-5 px-5 lg:px-10 rounded-lg flex items-center justify-between gap-2 counter">
+          {{ range .count }}
+          <div class="text-center text-white">
+            <h2 class="text-white sm:h1">
+              <span class="count">{{ .number | markdownify }}</span>
+              <span> {{ .suffix | markdownify }}</span>
+            </h2>
+            <p>{{ .title | markdownify }}</p>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+      <div class="lg:col-6" data-aos="fade-right-sm">
+        {{ partial "image" (dict "Src" .image "Alt" "Banner image" "Class" "mx-auto w-full rounded")
+        }}
+      </div>
+    </div>
+    {{ end }}
+
+    {{ with .Params.our_vision }}
+    <div class="row g-4 xl:g-5 justify-between items-center investment-container">
+      <div class="lg:col-6" data-aos="fade-right-sm">
+        <h2 class="h1 pb-6">{{ .title | markdownify }}</h2>
+        <h5 class="font-secondary text-primary text-xl pb-4">{{ .sort_description | markdownify }}</h5>
+        <p class="pb-8">{{ .description | markdownify }}</p>
+        {{ range .our_vision_children_content }}
+        <div class="pb-6">
+          <div class="flex items-center gap-2 pb-3">
+            <div class="text-primary flex items-center">
+              <i class="{{ .icon }} text-xl"></i>
+            </div>
+            <h6 class="font-semibold">{{ .title | markdownify }}</h6>
+          </div>
+          <p>{{ .description | markdownify }}</p>
+        </div>
+        {{ end }}
+      </div>
+      <div class="lg:col-6" data-aos="fade-left-sm">
+        {{ partial "image" (dict "Src" .image "Alt" "Banner image" "Class" "mx-auto w-full rounded")}}
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}
+<!--/ Our Mission/Vision -->
+
+
+
+
+<!-- Systematic Idea Management-->
+{{ with .Params.our_values }}
+<section class="section pb-0">
+  <div class="bg-shape-top-right py-20 lg:py-24 2xl:py-32" {{ partial `bg-image.html` (dict `Src` "images/bg-shape.png" ) | safeHTMLAttr }}>
+    <div class="container">
+      <div class="max-w-3xl mx-auto pb-24">
+        <h2 class="h1 text-center pb-4" data-aos="fade-up-sm"> {{ .title | markdownify }} </h2>
+        <p class="text-center text-balance" data-aos="fade-up-sm" data-aos-delay="100">
+          {{ .description | markdownify }}</p>
+      </div>
+      <div data-aos="fade-up-sm" data-aos-delay="100">
+        <div class="row gx-4 gap-y-20 colored-box-icon">
+          {{ range .our_values_cart }}
+          <div class="md:col-6 lg:col-4">
+            <div class="bg-body shadow rounded relative p-6 pb-10 h-full">
+              <div
+                class="p-2 rounded absolute top-[-30px] color-box color-text w-14 h-14 flex justify-center items-center mx-auto">
+                <i class="{{ .icon }} text-3xl"></i>
+              </div>
+              <h2 class="h6 pt-8">{{ .title | markdownify }}</h2>
+              <p class="pt-4">{{ .description | markdownify }}</p>
+              {{ if .button.enable }}
+              <div class="inline-block mt-8">
+                <a class="btn btn-outline-primary" href="{{ .button.link }}">
+                  <span>
+                    {{ .button.label | markdownify}}<span class="sr-only"> Details</span>
+                  </span>
+                  <svg class="w-3 sm:w-4" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+                      fill="currentColor" />
+                  </svg>
+                </a>
+              </div>
+              {{ end }}
+            </div>
+          </div>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /Systematic Idea Management -->
+{{ end }}
+
+
+
+<!-- Leadership Team -->
+{{ with .Params.leadership_team }}
+<section class="section pb-0">
+  <div class="container">
+    <div class="max-w-4xl mx-auto pb-14">
+      <h2 class="h1 text-center pb-4" data-aos="fade-up-sm">{{ .title | markdownify }}</h2>
+      <p class="text-center" data-aos="fade-up-sm" data-aos-delay="100">
+        {{ .description | markdownify }}
+      </p>
+    </div>
+    <div>
+      {{ $leadershipTeam := site.GetPage "sections/leadership-team" }}
+      {{ partial "components/leadership-team.html" $leadershipTeam }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+
+
+
+<!-- Working Process -->
+<section class="section pb-0 mx-4">
+  {{ $workingProcess := site.GetPage "sections/working-process" }}
+  {{ partial "components/working-process.html" $workingProcess }}
+</section>
+<!-- /Working Process -->
+
+
+<!-- Company's Journey Story -->
+{{ with .Params.company_journey_story}}
+<section class="section pb-0 overflow-hidden">
+  <div class="container">
+    <div class="max-w-3xl mx-auto pb-14">
+      <h2 class="h1 text-center pb-4" data-aos="fade-up-sm">{{ .title | markdownify }}</h2>
+      <p class="text-center" data-aos="fade-up-sm" data-aos-delay="50">
+        {{ .description | markdownify }}
+      </p>
+    </div>
+  </div>
+  <div class="container" data-aos="fade-up-sm" data-aos-delay="100">
+    <div class="sm:columns-2 lg:columns-3 gap-5">
+      {{ range .images }}
+      {{ partial "image" (dict "Src" .image "Alt" "about-office" "Class" "rounded-xl break-inside-avoid mb-5 mx-auto"
+      )}}
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+
+<!-- accordion -->
+{{ with .Params.accordion }}
+<section class="section mx-4">
+  <div class="bg-shape-top-right py-20 lg:py-24 2xl:py-32" {{ partial `bg-image.html` (dict `Src` "images/bg-shape.png" ) | safeHTMLAttr }}>
+    <div class="container z-10 relative">
+      <div class="row justify-center">
+        <div class="md:col-10 pb-14">
+          <h2 class="h1 text-center pb-4" data-aos="fade-up-sm">{{ .title | markdownify }}</h2>
+          <p class="max-w-3xl mx-auto text-center" data-aos="fade-up-sm" data-aos-delay="100">
+            {{ .description | markdownify }}
+          </p>
+        </div>
+      </div>
+      <div class="lg:columns-2 gap-x-6" data-aos="fade-up-sm" data-aos-delay="200">
+        {{ $number := .number_of_accordion }}
+        {{ $faq := (site.GetPage `/faq`).Page }}
+        {{ range $faq.Params.accordion_item | first $number }}
+        {{ partial "components/accordion" . }}
+        {{ end }}
+      </div>
+      {{ if .button.enable }}
+      <div class="block w-fit mx-auto mt-14">
+        <a class="btn btn-primary" href="{{ .button.link | relLangURL }}">
+          {{ .button.label | markdownify }}
+          <svg class="w-3 sm:w-4" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+              fill="currentColor" />
+          </svg>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+<!-- /accordion -->
+{{ end }}
+
+
+<!-- Call to action -->
+{{ partial "call-to-action.html" . }}
+<!-- /Call to action -->
+
+{{ end }}

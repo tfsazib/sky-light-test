@@ -1,0 +1,33 @@
+<!-- categories -->
+{{ if isset site.Taxonomies "categories" }}
+  {{ if not (eq (len site.Taxonomies.categories) 0) }}
+    <div class="mb-10">
+      <div class="relative py-5 mb-5">
+        <span
+          class="absolute top-1/2 left-0 transform -translate-y-1/2 w-full h-[6px] mx-auto rounded-xl block bg-primary"></span>
+        <p
+          class="text-black text-2xl px-5 z-10 relative text-center bg-theme-light block mx-auto w-fit">
+          {{ T "categories" }}
+        </p>
+      </div>
+      <ul class="widget-list">
+        {{ $index := 0 }}
+        {{ range $name, $items := site.Taxonomies.categories }}
+          {{ $index = add $index 1 }}
+          <li>
+            <a
+              href="{{ .Page.RelPermalink }}"
+              class="text-dark hover:text-primary transition duration-300 py-2 {{ if (and (eq $.Page.Kind `term`) (eq $.Page.Type `categories`) (eq $.Page.Title .Page.Title)) }}
+                active
+              {{ end }} flex justify-between items-center">
+              {{ .Page.Title }}
+              <span>
+                ({{ if lt (len $items) 10 }}0{{ end }}{{ len $items }})</span
+              >
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    </div>
+  {{ end }}
+{{ end }}

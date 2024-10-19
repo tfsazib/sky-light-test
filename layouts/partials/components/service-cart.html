@@ -1,0 +1,14 @@
+<div class="sm:col-6 lg:col-4 px-5 md:px-16 my-8 md:my-10">
+  <div
+    class="p-2 rounded bg-theme-light w-14 h-14 flex justify-center items-center mx-auto mb-8">
+    <i class="fa-solid {{ .Params.icon }} text-3xl text-primary"></i>
+  </div>
+  <h3 class="h5 text-center mb-4">
+    <a
+      href="{{ .RelPermalink }}"
+      class="hover:text-primary transition duration-300 inline-block">
+      {{ .Params.title | markdownify }}
+    </a>
+  </h3>
+  <p class="text-center">{{ .Params.description | markdownify }}</p>
+</div>

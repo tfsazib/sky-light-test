@@ -1,0 +1,214 @@
+{{ define "main" }}
+{{with .Params.team_hero}}
+<section class="mx-4 relative">
+  <div class="container">
+    <div class="row justify-center">
+      <div class="md:col-8 text-center pt-20 lg:pt-24 2xl:pt-32 pb-10 lg:pb-14">
+        <div
+          class="inline-flex items-center gap-2 bg-secondary py-2 px-6 rounded-3xl mb-4"
+          data-aos="fade-up-sm"
+        >
+        {{ partial "image" (dict "Src" .sub_title_icon "Alt" "icon" "Class" "h-7 w-7 shrink") }}
+          <p class="text-dark">{{ .sub_title | markdownify}}</p>
+        </div>
+        <h1
+          class="h1 text-5xl md:text-6xl mb-4 capitalize"
+          data-aos="fade-up-sm"
+          data-aos-delay="50"
+        >{{ .title | markdownify }}</h1>
+        <p class="mx-auto" data-aos="fade-up-sm" data-aos-delay="100">{{ .sort_description | markdownify }}</p>
+      </div>
+    </div>
+    <div  data-aos="fade-up-sm" data-aos-delay="150">
+      {{ partial "image" (dict "Src" .image "Alt" "image" "Class" "rounded-xl") }}
+      <p class="pt-10 lg:pt-14">{{ .description | markdownify }}</p>
+    </div>
+  </div>
+  <div
+    class="bg-shape-top-right w-full h-[calc(50%+3.5rem)] sm:h-[calc(50%+6rem)] !absolute top-0 left-1/2 transform -translate-x-1/2 !-z-10"  {{ partial `bg-image.html` (dict `Src` "images/bg-shape.png" ) | safeHTMLAttr }}></div>
+</section>
+{{ end }}
+
+
+<!-- Leadership Team -->
+{{ with .Params.leadership_team }}
+<section class="section pb-0">
+  <div class="container">
+    <div class="row justify-center">
+      <div class="md:col-10 pb-14">
+        <h2 class="h1 text-center pb-4" data-aos="fade-up-sm">{{ .title | markdownify }}</h2>
+        <p class="max-w-3xl mx-auto text-center" data-aos="fade-up-sm" data-aos-delay="100">
+          {{ .description | markdownify }}
+        </p>
+      </div>
+    </div>
+    <div>
+      {{ $leadershipTeam := site.GetPage "sections/leadership-team" }}
+      {{ partial "components/leadership-team.html" $leadershipTeam }}
+    </div>
+  </div>
+</section>
+{{ end }}
+<!-- /Leadership Team -->
+
+
+
+<!-- Team Member -->
+{{ with .Params.team }}
+<section class="section pb-0">
+  <div class="container">
+    <div class="row justify-center">
+      <div class="md:col-10 pb-14">
+        <h2 class="h1 text-center pb-4" data-aos="fade-up-sm">{{ .title | markdownify }}</h2>
+        <p class="max-w-3xl mx-auto text-center pb-5" data-aos="fade-up-sm" data-aos-delay="50">
+          {{ .description | markdownify }}
+        </p>
+        {{ if .button.enable }}
+        <div class="block w-fit mx-auto" data-aos="fade-up-sm" data-aos-delay="100">
+          <a class="btn btn-primary" href="{{ .button.link }}">
+            {{ .button.label | markdownify }}
+            <svg class="w-3 sm:w-4" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+                fill="currentColor" />
+            </svg>
+          </a>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+
+
+    <div class="row g-4">
+      {{ range .member }}
+      <div class="sm:col-6 lg:col-3">
+        <div
+          class="p-5 border border-primary rounded-xl group/cart h-[385px] lg:h-[400px] !transition !duration-500 overflow-hidden person-img">
+          {{ partial "image" (dict "Src" .image "Alt" "Person" "Class" "bg-theme-light rounded-xl mx-auto") }}
+          <h5 class="text-black text-center pt-5">{{ .name | markdownify }} </h5>
+          <p class="text-center pt-2 pb-4">{{ .designation | markdownify }}</p>
+          <div class="mt-[22px] group-hover/cart:mt-[0px] transition-all duration-300">
+            <div class="flex items-center justify-center gap-5">
+              {{ if .link.facebook }}
+              <a href="{{ .link.facebook }}"
+                class="bg-body p-2 rounded-full hover:bg-dark border border-dark transition duration-300 group">
+                <svg class="text-dark group-hover:text-body" width="20" height="21" viewBox="0 0 20 21" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M8.2862 18.8346V11.473H5.83203V8.40547H8.2862V5.9513C8.2862 3.41547 9.8912 2.16797 12.1529 2.16797C13.2362 2.16797 14.1679 2.2488 14.4395 2.28464V4.93464H12.8704C11.6404 4.93464 11.3537 5.52047 11.3537 6.37797V8.40547H14.4204L13.807 11.4721H11.3537L11.4029 18.8346"
+                    fill="currentColor" />
+                </svg>
+              </a>
+              {{ end }}
+              {{ if .link.twitter }}
+              <a href="{{ .link.twitter }}"
+                class="bg-body p-2 rounded-full hover:bg-dark border border-dark transition duration-300 group">
+                <svg class="text-dark group-hover:text-body" width="20" height="21" viewBox="0 0 20 21" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M18.7146 5.4987C18.0729 5.79036 17.3813 5.98203 16.6646 6.0737C17.3979 5.63203 17.9646 4.93203 18.2313 4.09036C17.5396 4.50703 16.7729 4.7987 15.9646 4.96536C15.3062 4.2487 14.3813 3.83203 13.3313 3.83203C11.3729 3.83203 9.77292 5.43203 9.77292 7.40703C9.77292 7.69036 9.80625 7.96536 9.86458 8.2237C6.89792 8.0737 4.25625 6.6487 2.49792 4.49036C2.18958 5.01536 2.01458 5.63203 2.01458 6.28203C2.01458 7.5237 2.63958 8.6237 3.60625 9.2487C3.01458 9.2487 2.46458 9.08203 1.98125 8.83203V8.85703C1.98125 10.5904 3.21458 12.0404 4.84792 12.3654C4.32352 12.5089 3.773 12.5288 3.23958 12.4237C3.46592 13.1341 3.9092 13.7557 4.5071 14.2011C5.105 14.6466 5.82746 14.8934 6.57292 14.907C5.30928 15.9074 3.74291 16.4481 2.13125 16.4404C1.84792 16.4404 1.56458 16.4237 1.28125 16.3904C2.86458 17.407 4.74792 17.9987 6.76458 17.9987C13.3313 17.9987 16.9396 12.5487 16.9396 7.8237C16.9396 7.66536 16.9396 7.51536 16.9312 7.35703C17.6313 6.85703 18.2312 6.2237 18.7146 5.4987Z"
+                    fill="currentColor" />
+                </svg>
+              </a>
+              {{ end }}
+              {{ if .link.instagram }}
+              <a href="{{ .link.instagram }}"
+                class="bg-body p-2 rounded-full hover:bg-dark border border-dark transition duration-300 group">
+                <svg class="text-dark group-hover:text-body" width="20" height="21" viewBox="0 0 20 21" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10.0013 2.16797C12.2655 2.16797 12.548 2.1763 13.4363 2.21797C14.3238 2.25964 14.928 2.3988 15.4596 2.60547C16.0096 2.81714 16.473 3.1038 16.9363 3.5663C17.36 3.98288 17.6879 4.48679 17.8971 5.04297C18.103 5.5738 18.243 6.1788 18.2846 7.0663C18.3238 7.95464 18.3346 8.23714 18.3346 10.5013C18.3346 12.7655 18.3263 13.048 18.2846 13.9363C18.243 14.8238 18.103 15.428 17.8971 15.9596C17.6885 16.5161 17.3606 17.0201 16.9363 17.4363C16.5196 17.8599 16.0157 18.1878 15.4596 18.3971C14.9288 18.603 14.3238 18.743 13.4363 18.7846C12.548 18.8238 12.2655 18.8346 10.0013 18.8346C7.73714 18.8346 7.45464 18.8263 6.5663 18.7846C5.6788 18.743 5.07464 18.603 4.54297 18.3971C3.98657 18.1884 3.48257 17.8604 3.0663 17.4363C2.64247 17.0198 2.31458 16.5159 2.10547 15.9596C1.8988 15.4288 1.75964 14.8238 1.71797 13.9363C1.6788 13.048 1.66797 12.7655 1.66797 10.5013C1.66797 8.23714 1.6763 7.95464 1.71797 7.0663C1.75964 6.17797 1.8988 5.57464 2.10547 5.04297C2.314 4.48645 2.64197 3.9824 3.0663 3.5663C3.48269 3.14233 3.98666 2.81441 4.54297 2.60547C5.07464 2.3988 5.67797 2.25964 6.5663 2.21797C7.45464 2.1788 7.73714 2.16797 10.0013 2.16797ZM10.0013 6.33464C8.89623 6.33464 7.83643 6.77362 7.05502 7.55502C6.27362 8.33643 5.83464 9.39623 5.83464 10.5013C5.83464 11.6064 6.27362 12.6662 7.05502 13.4476C7.83643 14.229 8.89623 14.668 10.0013 14.668C11.1064 14.668 12.1662 14.229 12.9476 13.4476C13.729 12.6662 14.168 11.6064 14.168 10.5013C14.168 9.39623 13.729 8.33643 12.9476 7.55502C12.1662 6.77362 11.1064 6.33464 10.0013 6.33464ZM15.418 6.1263C15.418 5.85003 15.3082 5.58508 15.1129 5.38973C14.9175 5.19438 14.6526 5.08464 14.3763 5.08464C14.1 5.08464 13.8351 5.19438 13.6397 5.38973C13.4444 5.58508 13.3346 5.85003 13.3346 6.1263C13.3346 6.40257 13.4444 6.66752 13.6397 6.86287C13.8351 7.05822 14.1 7.16797 14.3763 7.16797C14.6526 7.16797 14.9175 7.05822 15.1129 6.86287C15.3082 6.66752 15.418 6.40257 15.418 6.1263ZM10.0013 8.0013C10.6643 8.0013 11.3002 8.26469 11.7691 8.73353C12.2379 9.20238 12.5013 9.83826 12.5013 10.5013C12.5013 11.1643 12.2379 11.8002 11.7691 12.2691C11.3002 12.7379 10.6643 13.0013 10.0013 13.0013C9.33826 13.0013 8.70238 12.7379 8.23353 12.2691C7.76469 11.8002 7.5013 11.1643 7.5013 10.5013C7.5013 9.83826 7.76469 9.20238 8.23353 8.73353C8.70238 8.26469 9.33826 8.0013 10.0013 8.0013Z"
+                    fill="currentColor" />
+                </svg>
+              </a>
+              {{ end }}
+              {{ if .link.linkedin }}
+              <a href="{{ .link.linkedin }}"
+                class="bg-body p-2 rounded-full hover:bg-dark border border-dark transition duration-300 group">
+                <svg class="text-dark group-hover:text-body" width="20" height="21" viewBox="0 0 20 21" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5.27359 7.80859H2.08984V17.9979H5.27359V7.80859Z" fill="currentColor" />
+                  <path
+                    d="M3.61395 3C2.43998 3 1.66797 3.75925 1.66797 4.76733C1.66797 5.75627 2.41446 6.53467 3.56929 6.53467H3.59481C4.7943 6.53467 5.54079 5.74989 5.53441 4.76733C5.50889 3.75925 4.78792 3 3.61395 3Z"
+                    fill="currentColor" />
+                  <path
+                    d="M13.9696 7.71484C12.1448 7.71484 11.0028 8.71017 10.7922 9.41199V7.81055H7.21289C7.25755 8.65912 7.21289 17.9998 7.21289 17.9998H10.7922V12.4937C10.7922 12.181 10.7795 11.8748 10.8688 11.6578C11.1112 11.0453 11.6408 10.4073 12.5915 10.4073C13.8356 10.4073 14.3971 11.3516 14.3971 12.7297V17.9998H18.0083V12.3342C18.0083 9.18231 16.2346 7.71484 13.9696 7.71484Z"
+                    fill="currentColor" />
+                </svg>
+              </a>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+</section>
+{{ end }}
+<!-- /Team Member -->
+
+
+
+
+<!-- Company's Journey Story -->
+{{ with .Params.company_journey_story}}
+<section class="section pb-0 overflow-hidden">
+  <div class="row justify-center">
+    <div class="md:col-10 pb-14">
+      <h2 class="h1 text-center pb-4" data-aos="fade-up-sm">{{ .title | markdownify }}</h2>
+      <p class="max-w-2xl mx-auto text-center" data-aos="fade-up-sm" data-aos-delay="50">
+        {{ .description | markdownify }}</p>
+    </div>
+  </div>
+  <div class="container" data-aos="fade-up-sm" data-aos-delay="100">
+    <div class="sm:columns-2 lg:columns-3 gap-5">
+      {{ range .images }}
+      {{ partial "image" (dict "Src" .image "Alt" "about-office" "Class" "rounded-xl break-inside-avoid mb-5 mx-auto")}}
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+<!-- /Company's Journey Story -->
+
+
+
+<!-- accordion -->
+{{ with .Params.accordion }}
+<section class="section mx-4">
+  <div class="bg-shape-top-right py-20 lg:py-24 2xl:py-32" {{ partial `bg-image.html` (dict `Src` "images/bg-shape.png" ) | safeHTMLAttr }}>
+    <div class="container z-10 relative">
+      <div class="row justify-center">
+        <div class="md:col-10 pb-14">
+          <h2 class="h1 text-center pb-4" data-aos="fade-up-sm">{{ .title | markdownify }}</h2>
+          <p class="max-w-3xl mx-auto text-center" data-aos="fade-up-sm" data-aos-delay="100">{{ .description | markdownify }}</p>
+        </div>
+      </div>
+      <div class="lg:columns-2" data-aos="fade-up-sm" data-aos-delay="200">
+        {{ $number := .number_of_accordion }}
+        {{ $faq := (site.GetPage `/faq`).Page }}
+        {{ range $faq.Params.accordion_item | first $number }}
+        {{ partial "components/accordion" . }}
+        {{ end }}
+      </div>
+      {{ if .button.enable }}
+      <div class="block w-fit mx-auto mt-14">
+        <a class="btn btn-primary" href="{{ .button.link | relLangURL }}">
+          {{ .button.label | markdownify }}
+          <svg class="w-3 sm:w-4" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+              fill="currentColor" />
+          </svg>
+        </a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+<!-- /accordion -->
+
+
+{{ partial "call-to-action" . }}
+{{ end }}

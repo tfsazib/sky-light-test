@@ -1,0 +1,707 @@
+{{ define "main" }}
+  <!-- Banner -->
+  {{ with .Params.banner }}
+    <section class="mx-4">
+      <div class="bg-gradient">
+        <div class="container py-20 lg:py-24 2xl:py-32">
+          <div
+            class="flex flex-col lg:flex-row justify-between items-center gap-16 lg:gap-6 relative z-[10]">
+            <div class="flex-1">
+              <div data-aos="fade-right-sm">
+                <div
+                  class="inline-flex items-center gap-2 bg-secondary py-2 px-5 rounded-3xl mb-4">
+                  {{ partial "image" (dict "Src" .sub_title_icon "Alt" "Banner image" "Class" "w-7 h-7 shrink" )}}
+                  <p class="text-dark text-[14px] sm:text-base">
+                    {{ .sub_title | markdownify }}
+                  </p>
+                </div>
+                <h1
+                  class="mb-4 capitalize text-4xl lg:text-5xl xl:text-6xl leading-[44px] lg:leading-[64px] xl:leading-[76px] font-bold">
+                  {{ .title | markdownify }}
+                </h1>
+                <p class="text-dark pb-10 text-balance">
+                  {{ .content | markdownify }}
+                </p>
+                {{ if .button.enable }}
+                  <div class="inline-block">
+                    <a class="btn btn-primary" href="{{ .button.link }}">
+                      <span>
+                        {{ .button.label | markdownify }}<span class="sr-only">
+                          Details</span
+                        >
+                      </span>
+                      <svg
+                        class="w-3 sm:w-4"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 14 14"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+                          fill="currentColor" />
+                      </svg>
+                    </a>
+                  </div>
+                {{ end }}
+              </div>
+            </div>
+            {{ with .images }}
+              <div class="flex-1 relative" data-aos="fade-left-sm">
+                {{ partial "image" (dict "Src" .main "Alt" "Banner image" "Class" "w-[90%] drop-shadow-lg rounded-xl mx-auto 2xl:ml-20" ) }}
+                {{ partial "image" (dict "Src" .left "Alt" "Banner image" "Class" "w-1/3 lg:w-auto absolute top-[20%] -left-2 2xl:left-5 drop-shadow-lg rounded" ) }}
+                {{ partial "image" (dict "Src" .left "Alt" "Banner image" "Class" "absolute top-[10%] -right-3 2xl:-right-20 drop-shadow-lg rounded hidden xl:block" ) }}
+                {{ partial "image" (dict "Src" .right "Alt" "Banner image" "Class" "w-1/3 lg:w-auto absolute bottom-[12%] -right-3 2xl:-right-20 drop-shadow-lg rounded" ) }}
+              </div>
+            {{ end }}
+          </div>
+          <div>
+            {{ $companyLogo := site.GetPage "sections/company-logo" }}
+            {{ partial "components/company-logo.html" $companyLogo }}
+          </div>
+        </div>
+      </div>
+    </section>
+  {{ end }}
+  <!-- /Banner -->
+
+  <!-- Systematic Idea Management-->
+  {{ with .Params.idea_management }}
+    <section class="section pb-0">
+      <div class="container">
+        <div class="max-w-2xl mx-auto pb-24">
+          <h2 class="h1 text-center" data-aos="fade-up-sm">
+            {{ .title | markdownify }}
+          </h2>
+        </div>
+        <div data-aos="fade-up-sm" data-aos-delay="100">
+          <div class="row gx-4 gap-y-20">
+            {{ range .idea_management_cart }}
+              <div class="md:col-6 lg:col-4">
+                <div class="bg-body shadow rounded relative p-6 pb-10 h-full">
+                  <div
+                    class="p-2 rounded absolute top-[-30px] bg-theme-light w-14 h-14 flex justify-center items-center mx-auto">
+                    <i class="{{ .icon }} text-3xl text-primary"></i>
+                  </div>
+                  <h2 class="h6 pt-8">{{ .title | markdownify }}</h2>
+                  <p class="pt-4">{{ .description | markdownify }}</p>
+                  {{ if .button.enable }}
+                    <div class="inline-block mt-8">
+                      <a
+                        class="btn btn-outline-primary"
+                        href="{{ .button.link }}">
+                        <span>
+                          {{ .button.label | markdownify }}<span
+                            class="sr-only">
+                            Details</span
+                          >
+                        </span>
+                        <svg
+                          class="w-3 sm:w-4"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 14 14"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+                            fill="currentColor" />
+                        </svg>
+                      </a>
+                    </div>
+                  {{ end }}
+                </div>
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </section>
+  {{ end }}
+  <!-- /Systematic Idea Management -->
+
+  <!--  Auto Investment Opportunities  -->
+  {{ with .Params.investment_opportunities }}
+    <section class="section pb-0 mx-4 relative">
+      <div
+        class="bg-shape-top-left py-20 lg:py-24 2xl:py-32"
+        {{ partial `bg-image.html` (dict `Src` "images/bg-shape.png" ) | safeHTMLAttr }}>
+        <div class="container relative z-10">
+          <div class="max-w-4xl mx-auto pb-20 text-center">
+            <h2 class="h1 pb-4" data-aos="fade-up-sm">
+              {{ .title | markdownify }}
+            </h2>
+            <p class="max-w-lg mx-auto" data-aos="fade-up-sm" data-aos-delay="100">
+              {{ .description | markdownify }}
+            </p>
+          </div>
+          {{ range .investment_opportunities_cart }}
+            <div class="row g-4 xl:g-5 gy-5 items-center investment-container">
+              <div class="lg:col-6" data-aos="fade-right-sm" data-aos-delay="100">
+                <div class="flex justify-center">
+                  <div class="z-10 relative investment-bg">
+                    {{ partial "image" (dict "Src" .image "Alt" "Investment image" "Class" "z-10 mx-auto w-full") }}
+                  </div>
+                </div>
+              </div>
+              <div class="lg:col-6" data-aos="fade-left-sm" data-aos-delay="100">
+                <h2 class="pb-4">{{ .title | markdownify }}</h2>
+                <p class="pb-10">{{ .description | markdownify }}</p>
+                {{ range .investment_opportunities_children_cart }}
+                  <div class="pb-6">
+                    <div class="flex items-center gap-2">
+                      <div class="text-primary shrink-0">
+                        <svg
+                          class="text-xl !leading-7 icon icon-tabler icons-tabler-outline icon-tabler-square-check"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path
+                            d="M3 3m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
+                          <path d="M9 12l2 2l4 -4" />
+                        </svg>
+                      </div>
+                      <h2 class="font-semibold h6">
+                        {{ .sub_title | markdownify }}
+                      </h2>
+                    </div>
+                    <p class="pt-3">{{ .sort_description | markdownify }}</p>
+                  </div>
+                  {{ if .button.enable }}
+                    <div class="inline-block mt-8">
+                      <a class="btn btn-primary" href="{{ .button.link }}">
+                        <span>
+                          {{ .button.label | markdownify }}<span
+                            class="sr-only">
+                            Details</span
+                          >
+                        </span>
+                        <svg
+                          class="w-3 sm:w-4"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 14 14"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+                            fill="currentColor" />
+                        </svg>
+                      </a>
+                    </div>
+                  {{ end }}
+                {{ end }}
+              </div>
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    </section>
+  {{ end }}
+  <!--  /Auto Investment Opportunities  -->
+
+  <!-- Services -->
+  {{ with .Params.service }}
+    <section class="section pb-0">
+      <div class="container">
+        <h2 class="h1 max-w-4xl mx-auto pb-14 text-center" data-aos="fade-up-sm">
+          {{ .title | markdownify }}
+        </h2>
+        <div
+          class="row g-4 divide-x-border responsive-mb"
+          data-aos="fade-up-sm"
+          data-aos-delay="200">
+          {{ $number := .visible_service }}
+          {{ $servicePosts := (where $.Site.RegularPages "Section" "services") | first $number }}
+          {{ range $servicePosts }}
+            {{ partial "components/service-cart" . }}
+          {{ end }}
+        </div>
+        {{ if .button.enable }}
+          <div class="block w-fit mx-auto mt-14">
+            <a class="btn btn-primary" href="{{ .button.link }}">
+              {{ .button.label | markdownify }}
+              <svg
+                class="w-3 sm:w-4"
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+                  fill="currentColor" />
+              </svg>
+            </a>
+          </div>
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
+  <!-- /Services -->
+
+  <!-- Working Process -->
+  <section class="section pb-0 mx-4">
+    {{ $workingProcess := site.GetPage "sections/working-process" }}
+    {{ partial "components/working-process.html" $workingProcess }}
+  </section>
+  <!-- /Working Process -->
+
+  <!-- Partners -->
+  {{ with .Params.partners }}
+    <section class="section pb-0">
+      <div class="container">
+        <div class="flex justify-center">
+          <div class="max-w-2xl pb-14">
+            <h2 class="h1 text-center pb-4" data-aos="fade-up-sm">
+              {{ .title | markdownify }}
+            </h2>
+            <p
+              class="max-w-lg mx-auto text-center"
+              data-aos="fade-up-sm"
+              data-aos-delay="100">
+              {{ .description | markdownify }}
+            </p>
+          </div>
+        </div>
+        <div
+          class="max-w-3xl mx-auto flex flex-wrap justify-center items-center gap-5"
+          data-aos="fade-up-sm"
+          data-aos-delay="200">
+          {{ range .partners_logo }}
+            <div
+              class="w-16 h-16 border border-primary rounded-lg p-2 flex items-center justify-center">
+              {{ partial "image" (dict "Src" . "Alt" "brand-image" "Class" "w-10 h-10" ) }}
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    </section>
+  {{ end }}
+  <!-- /Partners -->
+
+  <!-- Pricing -->
+  {{ with .Params.pricing }}
+    <section class="section pb-0 mx-4">
+      <div
+        class="bg-shape-top-right py-20 lg:py-24 2xl:py-32"
+        {{ partial `bg-image.html` (dict `Src` "images/bg-shape.png" ) | safeHTMLAttr }}>
+        <div class="container z-10 relative">
+          <div
+            class="row g-4 justify-between tab"
+            data-tab-group="tab-group-name">
+            <div class="xl:col-4 relative" data-aos="fade-right-sm">
+              <p class="text-primary pb-3">{{ .sub_title | markdownify }}</p>
+              <h2 class="h1 pb-6">{{ .title | markdownify }}</h2>
+              <p class="pb-10">{{ .description | markdownify }}</p>
+              <div class="flex mb-14 gap-6 sm:gap-10" data-tab-nav="">
+                <button
+                  class="btn btn-outline-primary tab-nav-item active"
+                  tabindex="0"
+                  data-tab="0">
+                  {{ T "monthly" }}
+                </button>
+                <button
+                  class="btn btn-outline-primary tab-nav-item"
+                  tabindex="-1"
+                  data-tab="1">
+                  {{ T "yearly" }}
+                </button>
+              </div>
+              <div class="absolute bottom-14 left-40 z-[-1] hidden xl:block">
+                <svg
+                  class="text-secondary"
+                  width="386"
+                  height="219"
+                  viewBox="0 0 386 219"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M1.5 99.6144C44.3333 155.801 159.684 307.674 207 144.907C253 -13.3325 340.5 2.72126 383 11.8946"
+                    stroke="currentColor"
+                    stroke-width="2" />
+                  <path
+                    d="M376.222 1.00098L384 12.009L374 19.3476"
+                    stroke="currentColor"
+                    stroke-width="2" />
+                </svg>
+              </div>
+            </div>
+            <div class="xl:col-7 tab-content" data-tab-content>
+              <div class="tab-content" data-tab-content>
+                <div
+                  class="tab-content-panel active"
+                  data-tab-panel="0"
+                  data-aos="fade-left-sm"
+                  data-aos-delay="100">
+                  <div class="row g-4">
+                    {{ with site.GetPage "sections/pricing-plan" }}
+                      {{ range .Params.pricing_card }}
+                        {{ if .visible_home_page }}
+                          <div class="sm:col-6">
+                            <div
+                              class="bg-white border border-border hover:border-primary rounded-lg {{ if .popularity.enable }}
+                                border-primary
+                              {{ end }}"
+                              data-tab-panel="0">
+                              <div class="p-5 md:p-8">
+                                <div
+                                  class="flex items-center justify-between mb-5">
+                                  <div
+                                    class="w-14 h-14 rounded-full bg-theme-light flex items-center justify-center">
+                                    {{ if .popularity.enable }}
+                                      <svg
+                                      class="text-primary"
+                                        width="29"
+                                        height="20"
+                                        viewBox="0 0 29 20"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                          d="M14.5 13.001V19.001M14.5 13.001C21.6797 13.001 27.5 10.3147 27.5 7.00098M14.5 13.001C7.3203 13.001 1.5 10.3147 1.5 7.00098M14.5 19.001C6.5 19.001 1.5 16.001 1.5 13.001V7.00098M14.5 19.001C22.5 19.001 27.5 16.001 27.5 13.001V7.00098M27.5 7.00098C27.5 3.68727 21.6797 1.00098 14.5 1.00098C7.3203 1.00098 1.5 3.68727 1.5 7.00098M22.5 11.7643V17.7644M6.5 11.7643V17.7644"
+                                          stroke="currentColor"
+                                          stroke-width="2"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round" />
+                                      </svg>
+                                    {{ else }}
+                                      <svg
+                                        class="text-primary"
+                                        width="31"
+                                        height="25"
+                                        viewBox="0 0 31 25"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                          d="M29.5 9.00098L22.5 1.00098H8.5L1.5 9.00098M29.5 9.00098L15.5 24.001M29.5 9.00098H1.5M15.5 24.001L1.5 9.00098M15.5 24.001L21.6364 9.00098L15.5 1.00098L9.36362 9.00098L15.5 24.001Z"
+                                          stroke="currentColor"
+                                          stroke-width="2"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round" />
+                                      </svg>
+                                    {{ end }}
+                                  </div>
+                                  {{ if .popularity.enable }}
+                                    <p
+                                      class="text-primary bg-theme-light px-2 py-1 rounded border border-primary float-right">
+                                      {{ .popularity.content | markdownify }}
+                                    </p>
+                                  {{ end }}
+                                </div>
+                                <p
+                                  class="text-xl font-semibold text-primary pb-2">
+                                  {{ .title | markdownify }}
+                                </p>
+                                <div class="flex items-center gap-2 pb-5">
+                                  <h2 class="h1">
+                                    {{ .currency }}{{ .monthly_price }}
+                                  </h2>
+                                  <h5 class="text-text font-medium">/mth</h5>
+                                </div>
+                                <p>{{ .content | markdownify }}</p>
+                              </div>
+                              <div class="p-5 md:p-8 border-t border-border">
+                                <ul class="mb-8 row g-3">
+                                  {{ range .monthly_services }}
+                                    <li class="flex items-center gap-2">
+                                      <svg
+                                        class="text-primary"
+                                        width="21"
+                                        height="20"
+                                        viewBox="0 0 21 20"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                          d="M14.625 7.75098L9.12497 13.001L6.375 10.376M19.5 10.001C19.5 14.9715 15.4706 19.001 10.5 19.001C5.52944 19.001 1.5 14.9715 1.5 10.001C1.5 5.03041 5.52944 1.00098 10.5 1.00098C15.4706 1.00098 19.5 5.03041 19.5 10.001Z"
+                                          stroke="currentColor"
+                                          stroke-width="1.5"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round" />
+                                      </svg>
+                                      {{ . }}
+                                    </li>
+                                  {{ end }}
+                                </ul>
+                                {{ if .button.enable }}
+                                  <div class="inline-block">
+                                    <a
+                                      class="btn btn-primary"
+                                      href="{{ .button.link }}">
+                                      {{ .button.label | markdownify }}
+                                      <svg
+                                        class="w-3 sm:w-4"
+                                        width="14"
+                                        height="14"
+                                        viewBox="0 0 14 14"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                          d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+                                          fill="currentColor" />
+                                      </svg>
+                                    </a>
+                                  </div>
+                                {{ end }}
+                              </div>
+                            </div>
+                          </div>
+                        {{ end }}
+                      {{ end }}
+                    {{ end }}
+                  </div>
+                </div>
+                <div
+                  class="tab-content-panel active"
+                  data-tab-panel="1"
+                  data-aos="fade-left-sm">
+                  <div class="row g-4">
+                    {{ with site.GetPage "sections/pricing-plan" }}
+                      {{ range .Params.pricing_card }}
+                        {{ if .visible_home_page }}
+                          <div class="sm:col-6">
+                            <div
+                              class="bg-white border hover:border-primary rounded-lg {{ if .popularity.enable }}
+                                border-primary
+                              {{ end }}"
+                              data-tab-panel="0">
+                              <div class="p-5 md:p-8">
+                                <div
+                                  class="flex items-center justify-between mb-5">
+                                  <div
+                                    class="w-14 h-14 rounded-full bg-theme-light flex items-center justify-center">
+                                    {{ if .popularity.enable }}
+                                      <svg
+                                      class="text-primary"
+                                        width="29"
+                                        height="20"
+                                        viewBox="0 0 29 20"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                          d="M14.5 13.001V19.001M14.5 13.001C21.6797 13.001 27.5 10.3147 27.5 7.00098M14.5 13.001C7.3203 13.001 1.5 10.3147 1.5 7.00098M14.5 19.001C6.5 19.001 1.5 16.001 1.5 13.001V7.00098M14.5 19.001C22.5 19.001 27.5 16.001 27.5 13.001V7.00098M27.5 7.00098C27.5 3.68727 21.6797 1.00098 14.5 1.00098C7.3203 1.00098 1.5 3.68727 1.5 7.00098M22.5 11.7643V17.7644M6.5 11.7643V17.7644"
+                                          stroke="currentColor"
+                                          stroke-width="2"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round" />
+                                      </svg>
+                                    {{ else }}
+                                      <svg
+                                        class="text-primary"
+                                        width="31"
+                                        height="25"
+                                        viewBox="0 0 31 25"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                          d="M29.5 9.00098L22.5 1.00098H8.5L1.5 9.00098M29.5 9.00098L15.5 24.001M29.5 9.00098H1.5M15.5 24.001L1.5 9.00098M15.5 24.001L21.6364 9.00098L15.5 1.00098L9.36362 9.00098L15.5 24.001Z"
+                                          stroke="currentColor"
+                                          stroke-width="2"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round" />
+                                      </svg>
+                                    {{ end }}
+                                  </div>
+                                  {{ if .popularity.enable }}
+                                    <p
+                                      class="text-primary bg-theme-light px-2 py-1 rounded border border-primary float-right">
+                                      {{ .popularity.content }}
+                                    </p>
+                                  {{ end }}
+                                </div>
+                                <p
+                                  class="text-xl font-semibold text-primary pb-2">
+                                  {{ .title | markdownify }}
+                                </p>
+                                <div class="flex items-center gap-2 pb-5">
+                                  <h2 class="h1">
+                                    {{ .currency }}{{ .yearly_price }}
+                                  </h2>
+                                  <h5 class="text-text font-medium">/year</h5>
+                                </div>
+                                <p>{{ .content | markdownify }}</p>
+                              </div>
+                              <div class="p-5 md:p-8 border-t border-border">
+                                <ul class="mb-8 row g-3">
+                                  {{ range .yearly_services }}
+                                    <li class="flex items-center gap-2">
+                                      <svg
+                                        class="text-primary"
+                                        width="21"
+                                        height="20"
+                                        viewBox="0 0 21 20"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                          d="M14.625 7.75098L9.12497 13.001L6.375 10.376M19.5 10.001C19.5 14.9715 15.4706 19.001 10.5 19.001C5.52944 19.001 1.5 14.9715 1.5 10.001C1.5 5.03041 5.52944 1.00098 10.5 1.00098C15.4706 1.00098 19.5 5.03041 19.5 10.001Z"
+                                          stroke="currentColor"
+                                          stroke-width="1.5"
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round" />
+                                      </svg>
+                                      {{ . }}
+                                    </li>
+                                  {{ end }}
+                                </ul>
+                                {{ if .button.enable }}
+                                  <div class="inline-block">
+                                    <a
+                                      class="btn btn-primary"
+                                      href="{{ .button.link }}">
+                                      {{ .button.label | markdownify }}
+                                      <svg
+                                        class="w-3 sm:w-4"
+                                        width="14"
+                                        height="14"
+                                        viewBox="0 0 14 14"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                          d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+                                          fill="currentColor" />
+                                      </svg>
+                                    </a>
+                                  </div>
+                                {{ end }}
+                              </div>
+                            </div>
+                          </div>
+                        {{ end }}
+                      {{ end }}
+                    {{ end }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {{ end }}
+
+
+  <!-- Testimonial -->
+  {{ with .Params.testimonial }}
+    <section class="section pb-0">
+      <div class="container">
+        <h2 class="h1 max-w-3xl mx-auto text-center pb-14" data-aos="fade-up-sm">
+          {{ .title | markdownify }}
+        </h2>
+        <div
+          class="md:columns-2 lg:columns-3"
+          data-aos="fade-up-sm"
+          data-aos-delay="100">
+          {{ partial "components/testimonial" . }}
+        </div>
+      </div>
+    </section>
+  {{ end }}
+  <!-- /Testimonial -->
+
+  <!-- accordion -->
+  {{ with .Params.accordion }}
+    <section class="section pb-0 mx-4">
+      <div
+        class="bg-shape-top-right py-20 lg:py-24 2xl:py-32"
+        {{ partial `bg-image.html` (dict `Src` "images/bg-shape.png" ) | safeHTMLAttr }}>
+        <div class="container z-10 relative">
+          <div class="max-w-3xl mx-auto pb-14">
+            <h2 class="h1 text-center pb-4" data-aos="fade-up-sm">
+              {{ .title | markdownify }}
+            </h2>
+            <p class="text-center" data-aos="fade-up-sm" data-aos-delay="100">
+              {{ .description | markdownify }}
+            </p>
+          </div>
+          <div
+            class="lg:columns-2 gap-x-6"
+            data-aos="fade-up-sm"
+            data-aos-delay="200">
+            {{ $number := .number_of_accordion }}
+            {{ $faq := (site.GetPage `/faq`).Page }}
+            {{ range $faq.Params.accordion_item | first $number }}
+              {{ partial "components/accordion" . }}
+            {{ end }}
+          </div>
+          {{ if .button.enable }}
+            <div class="block w-fit mx-auto mt-14">
+              <a class="btn btn-primary" href="{{ .button.link | relLangURL }}">
+                {{ .button.label | markdownify }}
+                <svg
+                  class="w-3 sm:w-4"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+                    fill="currentColor" />
+                </svg>
+              </a>
+            </div>
+          {{ end }}
+        </div>
+      </div>
+    </section>
+  {{ end }}
+  <!-- /accordion -->
+
+  <!-- Blog -->
+  {{ with .Params.blog }}
+    <section class="section">
+      <div class="container">
+        <div class="max-w-2xl mx-auto pb-14">
+          <h2 class="h1 text-center pb-4" data-aos="fade-up-sm">
+            {{ .title | markdownify }}
+          </h2>
+          <p class="text-center" data-aos="fade-up-sm" data-aos-delay="100">
+            {{ .description | markdownify }}
+          </p>
+        </div>
+        <div class="row g-4">
+          {{ $number := .number_of_blog }}
+          {{ $blogPost := (where $.Site.RegularPages "Section" "blog") | first $number }}
+          {{ range $blogPost }}
+            <div class="md:col-6 lg:col-4">
+              {{ partial "components/blog-card" . }}
+            </div>
+          {{ end }}
+        </div>
+        {{ if .button.enable }}
+          <div class="block w-fit mx-auto mt-14">
+            <a class="btn btn-primary" href="{{ .button.link }}">
+              <span>
+                {{ .button.label | markdownify }}<span class="sr-only">
+                  Details</span
+                >
+              </span>
+              <svg
+                class="w-3 sm:w-4"
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M11.5137 3.91989L11.5137 9.50603C11.5114 9.63879 11.5356 9.77069 11.5848 9.89402C11.634 10.0173 11.7073 10.1296 11.8003 10.2243C11.8934 10.319 12.0044 10.3943 12.1269 10.4456C12.2493 10.497 12.3808 10.5234 12.5136 10.5234C12.6463 10.5234 12.7778 10.497 12.9002 10.4456C13.0227 10.3943 13.1337 10.319 13.2268 10.2243C13.3198 10.1296 13.3931 10.0173 13.4423 9.89402C13.4916 9.77069 13.5157 9.63879 13.5134 9.50603L13.5134 1.50582C13.5134 1.24066 13.408 0.986368 13.2205 0.798868C13.033 0.611369 12.7787 0.506014 12.5136 0.505975L4.51334 0.505974C4.25118 0.510531 4.00129 0.617875 3.8175 0.804887C3.63371 0.991899 3.53072 1.24362 3.53072 1.50582C3.53072 1.76803 3.63371 2.01975 3.8175 2.20676C4.00129 2.39377 4.25118 2.50112 4.51334 2.50567L10.0995 2.50567L0.735273 11.8699C0.547737 12.0574 0.44238 12.3118 0.44238 12.577C0.44238 12.8422 0.547737 13.0966 0.735273 13.2841C0.922809 13.4716 1.17716 13.577 1.44238 13.577C1.7076 13.577 1.96195 13.4716 2.14949 13.2841L11.5137 3.91989Z"
+                  fill="currentColor" />
+              </svg>
+            </a>
+          </div>
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
+  <!-- /Blog -->
+
+  <!-- Call to action -->
+  {{ partial "call-to-action.html" . }}
+  <!-- /Call to action -->
+{{ end }}

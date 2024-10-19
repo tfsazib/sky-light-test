@@ -1,0 +1,9 @@
+<div
+  class="grid grid-cols-3 md:grid-cols-5 gap-10 justify-center pt-24 relative z-10"
+  data-aos="fade-up-sm">
+  {{ with . }}
+    {{ range .Params.company_logo }}
+      {{ partial "image" (dict "Src" . "Alt" "Company logo" "Class" "mx-auto" ) }}
+    {{ end }}
+  {{ end }}
+</div>

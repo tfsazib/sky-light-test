@@ -1,0 +1,134 @@
+<footer class="bg-dark">
+  <div class="container py-20 lg:py-24 2xl:py-28 border-b border-white/30">
+    <div class="row justify-between g-4">
+      <div class="sm:col-6 lg:col-3">
+        <div class="pb-6 md:pb-8 lg:pb-0">
+          <a
+            href="{{ site.Home.RelPermalink }}"
+            class="pb-2 md:pb-3 inline-block">
+            {{ partial "image" (dict "Src" site.Params.footer_logo "Alt" "Footer Logo" )}}
+          </a>
+          <div class="text-white/80">
+            {{ with site.Params.footer_description }}
+              <p class="pb-8">{{ . | markdownify }}</p>
+            {{ end }}
+            <div class="grid gap-4">
+              {{ range site.Params.footer_contact_info }}
+                <a
+                  href="{{ .link | safeURL }}"
+                  class="flex items-center gap-2 hover:text-primary transition duration-300"
+                  rel="noopener">
+                  <i class="text-primary text-xl shrink-0 {{ .icon }}"></i>
+                  <span>{{ .title }}</span>
+                </a>
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sm:col-3 lg:col-2">
+        <div class="pb-6 md:pb-8 lg:pb-0 pt-3 lg:w-fit lg:mx-auto">
+          <h6 class="pb-4 md:pb-6 text-white">{{ T "company" }}</h6>
+          <ul class="grid gap-2 md:gap-4 text-white/80">
+            {{ range site.Menus.company_footer }}
+              <li>
+                <a
+                  class="hover:text-primary transition duration-300"
+                  {{ if findRE `^http` .URL }}
+                    target="_blank" rel="noopener"
+                  {{ end }}
+                  href="{{ if findRE `^#` .URL }}
+                    {{ if not $.IsHome }}
+                      {{ site.Home.RelPermalink }}
+                    {{ end }}{{ .URL }}
+                  {{ else }}
+                    {{ .URL | relLangURL }}
+                  {{ end }}"
+                  >{{ .Name }}</a
+                >
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+      <div class="sm:col-3 lg:col-2">
+        <div class="pb-6 md:pb-8 lg:pb-0 pt-3 lg:w-fit lg:mx-auto">
+          <h6 class="pb-4 md:pb-6 text-white">{{ T "product" }}</h6>
+          <ul class="grid gap-2 md:gap-4 text-white/80">
+            {{ range site.Menus.product_footer }}
+              <li>
+                <a
+                  class="hover:text-primary transition duration-300"
+                  {{ if findRE `^http` .URL }}
+                    target="_blank" rel="noopener"
+                  {{ end }}
+                  href="{{ if findRE `^#` .URL }}
+                    {{ if not $.IsHome }}
+                      {{ site.Home.RelPermalink }}
+                    {{ end }}{{ .URL }}
+                  {{ else }}
+                    {{ .URL | relLangURL }}
+                  {{ end }}"
+                  >{{ .Name }}</a
+                >
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+      <div class="sm:col-6 lg:col-2">
+        <div class="pb-6 md:pb-8 lg:pb-0 pt-3 lg:w-fit lg:mx-auto">
+          <h6 class="pb-4 md:pb-6 text-white">{{ T "utility_pages" }}</h6>
+          <ul class="grid gap-2 md:gap-4 text-white/80">
+            {{ range site.Menus.utility_pages_footer }}
+              <li>
+                <a
+                  class="hover:text-primary transition duration-300"
+                  {{ if findRE `^http` .URL }}
+                    target="_blank" rel="noopener"
+                  {{ end }}
+                  href="{{ if findRE `^#` .URL }}
+                    {{ if not $.IsHome }}
+                      {{ site.Home.RelPermalink }}
+                    {{ end }}{{ .URL }}
+                  {{ else }}
+                    {{ .URL | relLangURL }}
+                  {{ end }}"
+                  >{{ .Name }}</a
+                >
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+      <div class="sm:col-6 lg:col-3">
+        <div class="pt-3">
+          <h6 class="pb-4 md:pb-6 text-white">{{ T "social_media" }}</h6>
+          {{ with site.Params.footer_description_02 }}
+            <p class=" text-white/80">{{ . | markdownify }}</p>
+          {{ end }}
+          <ul class="social-icons pt-5">
+            {{ range site.Data.social.main }}
+              <li>
+                <a
+                  target="_blank"
+                  aria-label="{{ .name }}"
+                  rel="nofollow noopener"
+                  href="{{ .link | safeURL }}">
+                  <i class="{{ .icon }}"></i>
+                </a>
+              </li>
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-7">
+    <div class="container text-center text-dark">
+      <p class="copyright text-sm text-white/80">
+        {{ site.Params.copyright | markdownify }}
+      </p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,25 @@
+<!-- Recent Post -->
+<div class="mb-10">
+  <div class="relative my-10">
+    <span
+      class="absolute top-1/2 left-0 transform -translate-y-1/2 w-full h-[6px] mx-auto rounded-xl block bg-primary"></span>
+    <p
+      class="text-black text-2xl px-5 z-10 relative text-center bg-theme-light block mx-auto w-fit">
+      {{ T "recent_posts" }}
+    </p>
+  </div>
+  {{ range first 5 (where .Site.RegularPages "Section" "blog") }}
+    <div class="mt-5">
+      <a
+        href="{{ .RelPermalink }}"
+        class="text-dark hover:text-primary transition duration-300 line-clamp-2 grid grid-cols-8 gap-3">
+        <div class="col-span-2">
+          {{ partial "image" (dict "Src" .Params.image "Alt" "blog-image" "Class" "!h-14 object-cover rounded" ) }}
+        </div>
+        <span class="col-span-6">
+          {{ .Title }}
+        </span>
+      </a>
+    </div>
+  {{ end }}
+</div>

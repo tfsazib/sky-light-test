@@ -1,0 +1,61 @@
+{{ define "main" }}
+  <section class="mx-4">
+    <div
+      class="bg-shape-top-right"
+      {{ partial `bg-image.html` (dict `Src` "images/bg-shape.png" ) | safeHTMLAttr }}>
+      <div class="container py-20">
+        <div class="row justify-between items-center g-4 relative z-[10]">
+          <div class="lg:col-7" data-aos="fade-right-sm">
+            <div
+              class="inline-flex items-center gap-2 bg-secondary py-2 px-4 rounded-3xl mb-5">
+              {{ partial "image" (dict "Src" .Params.category_icon "Alt" "icon" "Class" "h-7 w-7") }}
+              <p class="text-dark">
+                {{ .Params.category | markdownify }}
+              </p>
+            </div>
+            <h1 class="mb-3 capitalize">{{ .Params.title | markdownify }}</h1>
+            <p class="mb-5 max-w-lg">
+              {{ .Params.description | markdownify }}
+            </p>
+          </div>
+          <div class="lg:col-5" data-aos="fade-left-sm">
+            {{ $image:= .Params.image }}
+            {{ if $image }}
+              <div class="mb-10">
+                {{ partial "image" (dict "Src" .Params.image "Alt" "image" "Class" "rounded-xl w-full") }}
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section pb-0 mx-4">
+    <article class="container">
+      <div class="content case-studies-content">
+        {{ .Content }}
+      </div>
+    </article>
+  </section>
+
+  <section class="section">
+    <div class="bg-shape-top-right py-20 lg:py-24 2xl:py-32" {{ partial `bg-image.html` (dict `Src` "images/bg-shape.png" ) | safeHTMLAttr }}>
+      <div class="container relative z-10">
+        <h2 class="pb-10 font-semibold">{{ T "other_case_studies" }}</h2>
+        <div class="row g-4">
+          {{ $currentCategory := .Params.category }}
+          {{ $caseStudies := (where $.Site.RegularPages "Section" "case-studies") }}
+          {{ $relatedPosts := (where $caseStudies "Params.category" $currentCategory) | first 3 }}
+          {{ range $relatedPosts }}
+            {{ partial "components/case-studies-cart" . }}
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to action -->
+  {{ partial "call-to-action.html" . }}
+  <!-- /Call to action -->
+{{ end }}
