@@ -2,6 +2,7 @@
 title: Test Powerful Termand Lineesy Tools For Modern Web…
 date: 2023-01-04T05:00:00Z
 categories:
+  - Test
   - Design
 author: Sophia **Parker**
 image: /images/office-img-1.png
